@@ -32,6 +32,6 @@ def put_player_on_board(board, player):
     Returns:
     Nothing
     '''
-    board[1][1] = player
+    board[player["Ypoz"]][player["Xpoz"]] = player
 
 
