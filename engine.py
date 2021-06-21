@@ -1,3 +1,7 @@
+
+from ObjectGenerator import spawn_floor
+
+
 def create_board(width, height):
     '''
     Creates a new game board based on input parameters.
@@ -9,7 +13,13 @@ def create_board(width, height):
     Returns:
     list: Game board
     '''
-    pass
+    board = []
+    for i in range(width):
+        board.append([])
+        for j in range(height):
+            board[i].append(spawn_floor())
+    return board
+
 
 
 def put_player_on_board(board, player):
@@ -24,3 +34,7 @@ def put_player_on_board(board, player):
     Nothing
     '''
     pass
+
+# def spawn_floor():
+#     return {"Name":"Floor", "Symbol":".", "Walkable":True}
+

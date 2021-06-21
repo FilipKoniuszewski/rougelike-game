@@ -1,6 +1,7 @@
 import util
 import engine
 import ui
+import ObjectGenerator
 
 PLAYER_ICON = '@'
 PLAYER_START_X = 3
@@ -22,21 +23,22 @@ def create_player():
 
 
 def main():
-    player = create_player()
-    board = engine.create_board(BOARD_WIDTH, BOARD_HEIGHT)
+    # player = create_player()
+    # board = engine.create_board(BOARD_WIDTH, BOARD_HEIGHT)
 
-    util.clear_screen()
-    is_running = True
-    while is_running:
-        engine.put_player_on_board(board, player)
-        ui.display_board(board)
+    # util.clear_screen()
+    # is_running = True
+    # while is_running:
+    #     engine.put_player_on_board(board, player)
+    #     ui.display_board(board)
 
-        key = util.key_pressed()
-        if key == 'q':
-            is_running = False
-        else:
-            pass
-        util.clear_screen()
+    #     key = util.key_pressed()
+    #     if key == 'q':
+    #         is_running = False
+    #     else:
+    #         pass
+    #     util.clear_screen()
+    ui.display_board(engine.create_board(20,30))
 
 
 if __name__ == '__main__':

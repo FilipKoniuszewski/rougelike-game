@@ -5,4 +5,9 @@ def display_board(board):
     Returns:
     Nothing
     '''
-    pass
+    output = ""
+    for i in range(len(board)):
+        for j in range(len(board[0])):
+            output += board[i][j]["Symbol"]
+        output += "\n"
+    print(output)
