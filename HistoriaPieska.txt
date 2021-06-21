@@ -1,0 +1,19 @@
+Jest sobie piesek <imię pieska>. Piesek wybrał się ze swoim Panem do parku aby poaportować piłeczke. Było bardzo dużo ludzi, ale pieskowi to nie przeszkadzało. Niestety, w pewnym momencie, gdy człowiek rzucił pieskowi piłkę, ta poleciała bardzo daleko. Piesek pobiegł za nią. Jednak gdy chciał wrócić okazało się, że nie mógł odnaleźć swojego Pana. Postanowił jednak wrócić do domu sam. I tu zaczyna się jego historia...
+Piesek na start ma tylko piłkę. Musi znaleźć jedzenie, picie i nocleg.
+
+LVL 1: starcie z Benkiem
+Piesek, aby znaleźć pożywienie, postanawia udać się pod sklep. Musi jednak przejść przez sporą ilość krzaków. Próbując je pokonać, natrafia na Benka, pieska, który jest źle nastawiony. Blokuje mu drogę. Nasz piesek próbuje go przekonać, że nie jest zły, lecz średnio mu to wychodzi. W ostateczności, na dowód swojej łagodnej natury, oddaje Benkowi swoją piłkę. Pieski się zaprzyjaźniają, Benek odprowadza naszego do miejsca, gdzie mogą zjeść, napić się i smacznie zasnąć.
+
+Pieski się żegnają. <imie> otrzymuje od Benka dwie puszki karmy, wodę i tajemnicy worek z cuchnącą substancją.
+
+LVL 2: Wkurzony kocur
+Piesek czuje, że zna okolicę. Jednak wciąż nie wie, jak wrócić do domu. Cały dzień wędruje niuchając trawkę i obsikując hydranty. W pewnym momencie zostaje otoczony przez gang kotów. Głowny kocur o imieniu Pręga każe oddać mu obrożę, popierając to tym, że żaden bezdomny pies nie może nosić obroży świadczącej o przynależności do jakiegoś domu. Piesek nie chce oddać obroży, wdaje się w bójkę. Będąc u kresu sił, z ekwpunku wypada mu tajemniczy worek. To kocimiętka. Koty w jednym momencie przestają atakować i rzucają sie na worek. Piesek może uciec i się schować.
+
+LVL 3 (opcjonalny) "Dzik jest dziki, dzik jest zły":
+Piesek wciąż jest w podróży, próbując znaleźć schronienie. Na jego drodze staje jednak Pan Dzik. Pan Dzik jest bardzo niebezpieczny (ma wysoki lvl), ale piesek nie chce wdawać się z nim w bójkę. Dzik jest jednak kulturalny i pyta pieska czy ma jakieś pożywienie. Piesek oferuje dzikowi ostatnią puszkę swojej karmy. Dzik jest bardzo szczęśliwy i wyjawia, że ktoś szukał pieska w tej okolicy. Pieskowi narasta nowa nadzieja, stąd ma dużo więcej energii. Dzik oferuje również ochronę pieska w trakcie snu (możemy tu zrobić waiting screen jak piesek śpi czy cos takiego).
+
+LVL 4: Hycel
+Piesek trafia w okolice, które już naprawdę dobrze kojarzy. "Sklep Pana Mleczarza" - myśli. To sklep, w którym jego Pan często kupuje mleko. Postanawia więc podejść pod niego i poczekać na swojego Pana. Ktoś jednak widząc pieska bez Pana, który siedzi pod sklepem, postanowił wezwać hycla. Piesek bardzo sie go przestraszył i postanowił zacząć uciekać. Słusznie zresztą, gdyż hycel miał za zadanie pieska złapać. Kto wie, co chciałby z nim zrobic? Piesek ucieka po okolicy. W końcu rozpoznaje swoją klatkę. Drzwi są owarte. Piesek wbiega, akurat z jego domu wychodzi jego Pan! *tu można coś dopisać jak już skończymy gierke*
+
+*KONIEC*
+
