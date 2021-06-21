@@ -1,5 +1,4 @@
-
-from ObjectGenerator import spawn_floor
+import ObjectGenerator
 
 
 def create_board(width, height):
@@ -17,7 +16,7 @@ def create_board(width, height):
     for i in range(width):
         board.append([])
         for j in range(height):
-            board[i].append(spawn_floor())
+            board[i].append(ObjectGenerator.spawn_floor())
     return board
 
 
@@ -33,8 +32,6 @@ def put_player_on_board(board, player):
     Returns:
     Nothing
     '''
-    pass
+    board[1][1] = player
 
-# def spawn_floor():
-#     return {"Name":"Floor", "Symbol":".", "Walkable":True}
 

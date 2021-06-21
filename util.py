@@ -32,5 +32,4 @@ def clear_screen():
     else:
         os.system('clear')
 
-# def spawn_floor():
-#     return {"Name":"Floor", "Symbol":".", "Walkable":True}
+
