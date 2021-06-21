@@ -3,6 +3,8 @@ import engine
 import ui
 import ObjectGenerator
 import random
+import time
+
 
 PLAYER_ICON = '@'
 PLAYER_START_X = 3
@@ -20,7 +22,39 @@ def create_player():
     Returns:
     dictionary
     '''
-    pass
+    type = 0
+    while True:
+        print(""" \nCHOOSE YOUR CHARACTER: \n""")
+        if type == 0:
+            character_type = ObjectGenerator.labrador_character()
+        elif type == 1:
+            character_type = ObjectGenerator.shiba_character()
+        elif type == 2:
+            character_type = ObjectGenerator.doberman_character()
+        elif type == 3:
+            character_type = ObjectGenerator.mops_character()
+        statistics = dict()
+        ui.print_character_class(character_type)
+        type += 1
+        player_input = input("""
+Press [q] choose this character
+Press [n] next character
+Press [p] previous character\n""").lower()
+        if player_input == 'c':
+            util.clear_screen()
+            return character_type
+        elif player_input == 'n':
+            util.clear_screen()
+            continue
+        elif player_input == "p":
+            type -= 1
+            util.clear_screen()
+            continue
+        else:
+            util.clear_screen()
+            print("Invalid type\n")
+            time.sleep(1.5)
+            continue
 
 
 def main():
