@@ -65,6 +65,7 @@ def add_enemies(board, amount, list_of_enemies):
         engine.put_player_on_board(board, temp)
         list_of_enemies.append(temp)
 
+
 def enemy_activity(board, list_of_enemies):
     for enemy in list_of_enemies:
         success = False
@@ -94,7 +95,8 @@ def enemy_activity(board, list_of_enemies):
                     board[enemy["Ypoz"]][enemy["Xpoz"]] = ObjectGenerator.spawn_floor()
                     enemy["Xpoz"] -= 1
                     success = True
- 
+
+
 def move_player(board, player):
     pressed_key = util.key_pressed()
     if pressed_key == "w":
@@ -145,6 +147,8 @@ def move_player(board, player):
                 return False
         else:
             return False
+    else:
+        return False
     return True
 
 
