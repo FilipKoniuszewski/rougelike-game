@@ -4,6 +4,7 @@ import random
 import ui
 import ObjectGenerator
 import engine
+import winsound
 EFFECTS = []
 
 
@@ -49,10 +50,11 @@ def Attack_chances(attacker:dict,defender):
         if tab_poss[1] <= attacker["CriticalChance"]:
             ui.Information_board(f"{attacker['Name']} managed to do Critical attack and dealed {attacker['BaseDamage']*2} damage to {defender['Name']}")
             defender["HP"] -= (attacker["BaseDamage"]*2)  
+            winsound.Beep(250,100)
         else:
             defender["HP"] -= attacker["BaseDamage"]
             ui.Information_board(f"{attacker['Name']} managed to attack and dealed {attacker['BaseDamage']} damage to {defender['Name']}")
-
+            winsound.Beep(200,100)
 def move_player(board, player):
     pressed_key = key_pressed()
     if pressed_key == "w":
@@ -61,6 +63,7 @@ def move_player(board, player):
                 board[player["Ypoz"] - 1][player["Xpoz"]] = player
                 board[player["Ypoz"]][player["Xpoz"]] = ObjectGenerator.spawn_floor()
                 player["Ypoz"] -= 1
+                winsound.Beep(150,100)
             elif board[player["Ypoz"] - 1][player["Xpoz"]]["Type"] == "Enemy":
                 Attack_chances(player, board[player["Ypoz"] - 1][player["Xpoz"]])
             else:
@@ -73,6 +76,7 @@ def move_player(board, player):
                 board[player["Ypoz"] + 1][player["Xpoz"]] = player
                 board[player["Ypoz"]][player["Xpoz"]] = ObjectGenerator.spawn_floor()
                 player["Ypoz"] += 1
+                winsound.Beep(150,100)
             elif board[player["Ypoz"] + 1][player["Xpoz"]]["Type"] == "Enemy":
                 Attack_chances(player,board[player["Ypoz"] + 1][player["Xpoz"]])
             else:
@@ -85,6 +89,7 @@ def move_player(board, player):
                 board[player["Ypoz"]][player["Xpoz"] + 1] = player
                 board[player["Ypoz"]][player["Xpoz"]] = ObjectGenerator.spawn_floor()
                 player["Xpoz"] += 1
+                winsound.Beep(150,100)
             elif board[player["Ypoz"]][player["Xpoz"] + 1]["Type"] == "Enemy":
                 Attack_chances(player,board[player["Ypoz"]][player["Xpoz"] + 1])
             else:
@@ -97,6 +102,7 @@ def move_player(board, player):
                 board[player["Ypoz"]][player["Xpoz"] - 1] = player
                 board[player["Ypoz"]][player["Xpoz"]] = ObjectGenerator.spawn_floor()
                 player["Xpoz"] -= 1
+                winsound.Beep(150,100)
             elif board[player["Ypoz"]][player["Xpoz"] - 1]["Type"] == "Enemy":
                 Attack_chances(player,board[player["Ypoz"]][player["Xpoz"] - 1])
             else:
@@ -165,6 +171,8 @@ def add_enemies(board, amount, list_of_enemies):
 def remove_dead_mobs(player, board, list_of_enemies):
     for mob in list_of_enemies:
         if mob["HP"] <= 0:
+            ui.Information_board(f"{player['Name']} has defeated {mob['Name']}")
+            winsound.Beep(300,100)
             for item in mob["Inventory"]:
                 player["Inventory"].append(item)
             player["Experience"] += mob["XpReward"]

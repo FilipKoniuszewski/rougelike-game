@@ -20,15 +20,17 @@ def display_board(board):
     print(output)
 
 def Information_board(info):
-    print(information_board)
     information_board.insert(0,info)
     if len(information_board) > 5:
        information_board.pop(5)
   
 
 def print_log():
-    for line in information_board:
-        print(line)
+    for i in range(len(information_board) - 1, -1, -1):
+        print(information_board[i])
+
+    # for line in information_board:
+    #     print(line)
 
 def print_table(inventory):
     print(f"""

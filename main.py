@@ -5,6 +5,7 @@ import ObjectGenerator
 import random
 import time
 import os
+import winsound
 
 PLAYER_ICON = '@'
 PLAYER_START_X = 3
@@ -64,6 +65,7 @@ def main():
             ui.display_board(board)
             ui.print_log()
             success = util.move_player(board, player)
+        
         if enemy_turn:
             util.enemy_activity(board, list_of_enemies, player)
             enemy_turn = False
@@ -72,5 +74,8 @@ def main():
 
 
 if __name__ == '__main__':
+    # while True:
+    #     winsound.Beep(200,100)
+
     main()
 
