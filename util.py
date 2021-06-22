@@ -191,6 +191,6 @@ def use_item(player, item):
             player["HP"] = player["MaxHP"]
     if "CriticalChanceReward" in item:
         player["CriticalChance"] += item["CriticalChanceReward"]
-        EFFECTS.append(["CriticalChance", 10, item["CriticalChanceReward"]])
+        EFFECTS.append(["CriticalChance", item["Duration"], item["CriticalChanceReward"]])
 
 

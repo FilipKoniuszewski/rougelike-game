@@ -48,7 +48,7 @@ def spawn_bone():
     return {"Name": "Bone", "Type": "Usable", "BaseDamageReward": 20, "DodgeChanceReward": -10}
 
 def spawn_stick():
-    return {"Name": "Stick", "Type": "Usable", "CriticalChanceReward": 20}
+    return {"Name": "Stick", "Type": "Usable", "CriticalChanceReward": 20, "Duration": 10}
 
 def spawn_banana_peel():
     return {"Name": "Banana peel", "Type": "Usable", "DodgeChanceReward": 0} #tu chciałam żeby całkowicie znikała możliwość uniku
