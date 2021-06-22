@@ -36,13 +36,6 @@ def put_player_on_board(board, player):
     board[player["Ypoz"]][player["Xpoz"]] = player
 
 def create_player():
-    '''
-    Creates a 'player' dictionary for storing all player related informations - i.e. player icon, player position.
-    Fell free to extend this dictionary!
-
-    Returns:
-    dictionary
-    '''
     type = 0
     while True:
         print(""" \nCHOOSE YOUR CHARACTER: \n""")
@@ -55,14 +48,15 @@ def create_player():
         elif type == 3:
             character_type = ObjectGenerator.mops_character()
         print(create_character_class_as_table(character_type))
-        player_input = input("""
-Press [c] choose this character
-Press [n] next character
-Press [p] previous character\n""").lower()
-        if player_input == 'c':
+        print("""
+Press [e] choose this character
+Press [d] next character
+Press [a] previous character\n""")
+        player_input = util.key_pressed()
+        if player_input == 'e':
             util.clear_screen()
             return character_type
-        elif player_input == 'n':
+        elif player_input == 'd':
             type += 1
             if type < 4:
                 util.clear_screen()
@@ -71,7 +65,7 @@ Press [p] previous character\n""").lower()
                 type = 0
                 util.clear_screen()
                 continue
-        elif player_input == "p":
+        elif player_input == "a":
             type -= 1
             if type >= 0:
                 util.clear_screen()
@@ -95,13 +89,38 @@ def create_character_class_as_table(character_type):
         if element != "Name":
             statistics[element] = character_type[element]
     table += f"{character_type['Name'].upper()}\n"
-    outside_edges = 25*"="
-    table += f"{outside_edges}"
+    outside_edges1 = 14*"═"
+    outside_edges2 = 8*"═"
+    table += f"╔{outside_edges1}╦{outside_edges2}╗"
     for i in statistics.items():
         space_before_values = 8 - len(str(i[1]))
         space_after_key = 14 - len(i[0])
-        table += f"\n|{i[0]}{' '*space_after_key}|{' '*space_before_values}{str(i[1])}|"
-    table += f"\n{outside_edges}"
+        table += f"\n║{i[0]}{' '*space_after_key}║{' '*space_before_values}{str(i[1])}║"
+    table += f"\n╚{outside_edges1}╩{outside_edges2}╝"
+    return table
+
+
+def display_statistics(player):
+    HEADERS = f"""
+╔══════════╦══════════╦══════════╦══════════╗
+║Name      ║HP        ║Armor     ║lvlExp    ║
+╠══════════╬══════════╬══════════╬══════════╣ \n"""
+    table = ""
+    table += HEADERS
+    for element in player:
+        if element == "Name":
+            spaces = 10 - len(player[element])
+            table += f"║{player[element]}{' '*spaces}║"
+        elif element == "HP":
+            spaces = 10 - len(str(player[element]))
+            table += f"{player[element]}{' '*spaces}"
+        elif element == "Armor":
+            spaces = 10 - len(str(player[element]))
+            table += f"║{player[element]}{' '*spaces}"
+        elif element == "lvlExp":
+            spaces = 10 - len(str(player[element]))
+            table += f"║{player[element]}{' '*spaces}║"
+    table += "\n╚══════════╩══════════╩══════════╩══════════╝"
     return table
 
 

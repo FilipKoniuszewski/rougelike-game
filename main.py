@@ -37,10 +37,9 @@ def main():
     # engine.put_player_on_board(board, ObjectGenerator.spawn_dogge(5,3))
     list_of_enemies = []
     add_enemies(board, 3, list_of_enemies)
-
-
     while True:
         util.clear_screen()
+        print(engine.display_statistics(player))
         ui.display_board(board)
         success = False
         while not success:
