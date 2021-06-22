@@ -4,12 +4,12 @@ Piesek na start ma tylko piłkę. Musi znaleźć jedzenie, picie i nocleg.
 LVL 1: starcie z Benkiem
 Piesek, aby znaleźć pożywienie, postanawia udać się pod sklep. Musi jednak przejść przez sporą ilość krzaków. Próbując je pokonać, natrafia na Benka, pieska, który wygląda na złego psa. Blokuje mu drogę. Benek prosi naszego pieska o pomoc. W jego kryjówce zalęgły się myszy, które trzeba wytępić. Benek jest starym psem i nie jest w stanie zrobić tego sam. Jeśli pieskowi i Benkowi uda się pozbyć myszy, to wzrasta lvl pieska. Pieski się zaprzyjaźniają, Benek pozwala zostać w swojej kryjówce, gdzie mogą zjeść, napić się i smacznie zasnąć.
 
-Pieski się żegnają. <imie> otrzymuje od Benka dwie puszki karmy, wodę, tajemniczy worek z dziwnie pachnącym czymś i kość.
+Pieski się żegnają. <imie> otrzymuje od Benka dwie puszki karmy, wodę, tajemniczy worek z dziwnie pachnącym czymś i kość, a sam zostawia mu piłeczkę.
 
 LVL 2: Wkurzony kocur
 Piesek czuje, że zna okolicę. Jednak wciąż nie wie, jak wrócić do domu. Cały dzień wędruje niuchając trawkę i obsikując hydranty. W pewnym momencie zostaje otoczony przez gang kotów. Głowny kocur o imieniu Pręga każe oddać mu obrożę, popierając to tym, że żaden bezdomny pies nie może nosić obroży świadczącej o przynależności do jakiegoś domu. Piesek nie chce oddać obroży, wdaje się w bójkę. Będąc u kresu sił, z ekwpunku wypada mu tajemniczy worek. To kocimiętka. Koty w jednym momencie przestają atakować i rzucają sie na worek. Piesek może uciec i się schować.
 
-LVL 3 (opcjonalny) "Dzik jest dziki, dzik jest zły":
+LVL 3 "Dzik jest dziki, dzik jest zły":
 Piesek wciąż jest w podróży, próbując znaleźć schronienie. Na jego drodze staje jednak Pan Dzik. Pan Dzik jest bardzo niebezpieczny (ma wysoki lvl), ale piesek nie chce wdawać się z nim w bójkę. Dzik jednak jest bardzo głodny i atakuje pieska. Piesek ma niewielkie szanse na wygraną. Jednak kość w jego ekwipunku zwiększa szanse na wygraną. Jeśli weźmie ją w łapkę, to może zadawać większe ataki. Jeśli wygra, to głodny dzik ucieka. Zostawia za sobą skórkę od banana. Piesek bierze ją, zostawia puszkę karmy dla dzika i idzie dalej. 
 
 LVL 4: Hycel
