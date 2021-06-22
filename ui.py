@@ -21,11 +21,13 @@ def Information_board(info):
        information_board.append(info)
     else:
         information_board.insert(0,info)
-    for x in range(len(information_board)):
-        if x >= 0 and x < 5:
-            print(information_board[x])
-    
+    if len(information_board) > 5:
+       information_board.pop(0)
+  
 
+def print_log():
+    for line in information_board:
+        print(line)
 
 
 
