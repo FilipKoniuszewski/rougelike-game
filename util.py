@@ -98,6 +98,8 @@ def move_player(board, player):
 def enemy_activity(board, list_of_enemies):
     for enemy in list_of_enemies:
         success = False
+        # if board[enemy["Ypoz"] - 1][enemy["Xpoz"]]
+
         while not success:
             x = random.randint(0, 4)
             if x == 0:
