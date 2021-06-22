@@ -14,49 +14,6 @@ BOARD_WIDTH = 30
 BOARD_HEIGHT = 20
 
 
-def create_player():
-    '''
-    Creates a 'player' dictionary for storing all player related informations - i.e. player icon, player position.
-    Fell free to extend this dictionary!
-
-    Returns:
-    dictionary
-    '''
-    type = 0
-    while True:
-        print(""" \nCHOOSE YOUR CHARACTER: \n""")
-        if type == 0:
-            character_type = ObjectGenerator.labrador_character()
-        elif type == 1:
-            character_type = ObjectGenerator.shiba_character()
-        elif type == 2:
-            character_type = ObjectGenerator.doberman_character()
-        elif type == 3:
-            character_type = ObjectGenerator.mops_character()
-        statistics = dict()
-        ui.print_character_class(character_type)
-        type += 1
-        player_input = input("""
-Press [q] choose this character
-Press [n] next character
-Press [p] previous character\n""").lower()
-        if player_input == 'c':
-            util.clear_screen()
-            return character_type
-        elif player_input == 'n':
-            util.clear_screen()
-            continue
-        elif player_input == "p":
-            type -= 1
-            util.clear_screen()
-            continue
-        else:
-            util.clear_screen()
-            print("Invalid type\n")
-            time.sleep(1.5)
-            continue
-
-
 def main():
     # player = create_player()
     # board = engine.create_board(BOARD_WIDTH, BOARD_HEIGHT)
@@ -74,9 +31,8 @@ def main():
     #         pass
     #     util.clear_screen()
 
-
     board = engine.create_board(20,30)
-    player = ObjectGenerator.spawn_player()
+    player = engine.create_player()
     engine.put_player_on_board(board, player)
     # engine.put_player_on_board(board, ObjectGenerator.spawn_dogge(5,3))
     list_of_enemies = []
