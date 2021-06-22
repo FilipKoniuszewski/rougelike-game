@@ -4,6 +4,7 @@ import random
 import ui
 import ObjectGenerator
 import engine
+EFFECTS = []
 
 
 def key_pressed():
@@ -105,6 +106,9 @@ def move_player(board, player):
     elif pressed_key == "i":
         clear_screen()
         ui.print_table(player["Inventory"])
+        return False    
+    elif pressed_key == "u": # testy
+        use_item(player, ObjectGenerator.spawn_stick())
         return False        
     else:
         return False
@@ -168,3 +172,15 @@ def add_to_inventory(inventory, added_items):
     inventory.update(added_items)
 
     add_to_inventory(inventory, added_items)
+
+
+def use_item(player, item):
+    if "HpReward" in item:
+        player["HP"] += item["HpReward"]
+        if player["HP"] > player["MaxHP"]:
+            player["HP"] = player["MaxHP"]
+    if "CriticalChanceReward" in item:
+        player["CriticalChance"] += item["CriticalChanceReward"]
+        EFFECTS.append(["CriticalChance", 5, item["CriticalChanceReward"]])
+
+

@@ -13,6 +13,17 @@ PLAYER_START_Y = 3
 BOARD_WIDTH = 30
 BOARD_HEIGHT = 20
 
+# ["EffectName", turnsLeft, value]
+
+def shuffle(player):
+    to_pop = []
+    for effect in util.EFFECTS:
+        effect[1] -= 1
+        if effect[1] == 0:
+            player[effect[0]] -= effect[2]
+            to_pop.append(effect)
+    for effect in to_pop:
+        util.EFFECTS.remove(effect)
 
 def main():
     # player = create_player()
@@ -46,6 +57,7 @@ def main():
         ui.print_log()
         success = False
         while not success:
+            shuffle(player)
             util.clear_screen()
             print(engine.display_statistics(player))
             ui.display_board(board)
@@ -60,3 +72,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
