@@ -30,7 +30,7 @@ def spawn_dogge(Xpoz, Ypoz):
     return {"Name":"dogge", "Type":"Enemy", "Symbol":"D", "Xpoz":Xpoz
     , "Ypoz":Ypoz, "Walkable":False, "Inventory":inventory
     , "HP": 100, "MaxHP":100, "BaseDamage":20, "CriticalChance":10
-    , "HitChance": 60, "DodgeChance": 20, "Armor":0}
+    , "HitChance": 60, "DodgeChance": 100, "Armor":0}
 
 def spawn_scooby_snack():
     return {"Name":"Scooby snack", "Type":"Consumable", "HpReward":20}
