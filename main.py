@@ -47,6 +47,7 @@ def main():
         success = False
         while not success:
             util.clear_screen()
+            print(engine.display_statistics(player))
             ui.display_board(board)
             ui.print_log()
             success = util.move_player(board, player)
@@ -58,15 +59,4 @@ def main():
 
 
 if __name__ == '__main__':
-
-    # DOG = ObjectGenerator.spawn_dogge(1,2)["Name"]
-    # ui.Information_board(f"dupa {DOG}")
-    # ui.Information_board("cyce")
-    # ui.Information_board("cyce")
-    # ui.Information_board("cyce")
-    # ui.Information_board("cyce")
-    # ui.Information_board("cyce")
-    # ui.Information_board("cyce")
-
-    # ui.print_log()
     main()

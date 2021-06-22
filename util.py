@@ -50,7 +50,7 @@ def Attack_chances(attacker:dict,defender):
             defender["HP"] -= (attacker["BaseDamage"]*2)  
         else:
             defender["HP"] -= attacker["BaseDamage"]
-            ui.information_board(f"{attacker['Name']} managed to attack and dealed {attacker['BaseDamage']} damage to defender")
+            ui.Information_board(f"{attacker['Name']} managed to attack and dealed {attacker['BaseDamage']} damage to defender")
 
 def move_player(board, player):
     pressed_key = key_pressed()
