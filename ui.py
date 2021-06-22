@@ -15,7 +15,6 @@ def display_board(board):
         output += "\n"
     print(output)
 
-
 def Information_board(info):
     if len(information_board)<0:
        information_board.append(info)
@@ -24,6 +23,8 @@ def Information_board(info):
     for x in range(len(information_board)):
         if x >= 0 and x < 5:
             print(information_board[x])
+
+
     
 
 

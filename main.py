@@ -3,6 +3,8 @@ import engine
 import ui
 import ObjectGenerator
 import random
+import time
+
 
 PLAYER_ICON = '@'
 PLAYER_START_X = 3
@@ -10,17 +12,6 @@ PLAYER_START_Y = 3
 
 BOARD_WIDTH = 30
 BOARD_HEIGHT = 20
-
-
-def create_player():
-    '''
-    Creates a 'player' dictionary for storing all player related informations - i.e. player icon, player position.
-    Fell free to extend this dictionary!
-
-    Returns:
-    dictionary
-    '''
-    pass
 
 
 def main():
@@ -40,9 +31,8 @@ def main():
     #         pass
     #     util.clear_screen()
 
-
     board = engine.create_board(20,30)
-    player = ObjectGenerator.spawn_player()
+    player = engine.create_player()
     engine.put_player_on_board(board, player)
     # engine.put_player_on_board(board, ObjectGenerator.spawn_dogge(5,3))
     list_of_enemies = []
