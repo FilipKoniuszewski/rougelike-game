@@ -54,6 +54,7 @@ def main():
     while True:
         util.clear_screen()
         print(engine.display_statistics(player))
+        print(engine.display_current_enemy())
         ui.display_board(board)
         ui.print_log()
         success = False
@@ -62,6 +63,7 @@ def main():
         while not success:
             util.clear_screen()
             print(engine.display_statistics(player))
+            print(engine.display_current_enemy())
             ui.display_board(board)
             ui.print_log()
             success = util.move_player(board, player)

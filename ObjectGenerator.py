@@ -29,7 +29,7 @@ def spawn_dogge(Xpoz, Ypoz):
     inventory = [spawn_scooby_snack(), spawn_scooby_snack()]
     return {"Name":"dogge", "Type":"Enemy", "Symbol":"D", "Xpoz":Xpoz
     , "Ypoz":Ypoz, "Walkable":False, "Inventory":inventory
-    , "HP": 100, "MaxHP":100, "BaseDamage":20, "CriticalChance":10
+    , "HP": 100, "Level": 1, "MaxHP":100, "BaseDamage":20, "CriticalChance":10
     , "DodgeChance": 0, "Armor":0, "XpReward": 100}
 
 def spawn_scooby_snack():

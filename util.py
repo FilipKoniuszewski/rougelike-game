@@ -66,6 +66,7 @@ def move_player(board, player):
                 winsound.Beep(150,100)
             elif board[player["Ypoz"] - 1][player["Xpoz"]]["Type"] == "Enemy":
                 Attack_chances(player, board[player["Ypoz"] - 1][player["Xpoz"]])
+                engine.CURRENT_ENEMY = board[player["Ypoz"] - 1][player["Xpoz"]]
             else:
                 return False
         else:
@@ -79,6 +80,7 @@ def move_player(board, player):
                 winsound.Beep(150,100)
             elif board[player["Ypoz"] + 1][player["Xpoz"]]["Type"] == "Enemy":
                 Attack_chances(player,board[player["Ypoz"] + 1][player["Xpoz"]])
+                engine.CURRENT_ENEMY = board[player["Ypoz"] + 1][player["Xpoz"]]
             else:
                 return False
         else:
@@ -92,6 +94,7 @@ def move_player(board, player):
                 winsound.Beep(150,100)
             elif board[player["Ypoz"]][player["Xpoz"] + 1]["Type"] == "Enemy":
                 Attack_chances(player,board[player["Ypoz"]][player["Xpoz"] + 1])
+                engine.CURRENT_ENEMY = board[player["Ypoz"]][player["Xpoz"] + 1]
             else:
                 return False
         else:
@@ -105,6 +108,7 @@ def move_player(board, player):
                 winsound.Beep(150,100)
             elif board[player["Ypoz"]][player["Xpoz"] - 1]["Type"] == "Enemy":
                 Attack_chances(player,board[player["Ypoz"]][player["Xpoz"] - 1])
+                engine.CURRENT_ENEMY = board[player["Ypoz"]][player["Xpoz"] - 1]
             else:
                 return False
         else:
@@ -178,6 +182,7 @@ def remove_dead_mobs(player, board, list_of_enemies):
             player["Experience"] += mob["XpReward"]
             board[mob["Ypoz"]][mob["Xpoz"]] = ObjectGenerator.spawn_floor()
             list_of_enemies.remove(mob)
+            engine.CURRENT_ENEMY = {}
 
 def add_to_inventory(inventory, added_items):
     """Add to the inventory dictionary a list of items from added_items."""

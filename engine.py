@@ -3,6 +3,8 @@ import util
 import time
 import ui
 
+CURRENT_ENEMY = {}
+
 
 def create_board(width, height):
     '''
@@ -121,6 +123,38 @@ def display_statistics(player):
             spaces = 10 - len(str(player[element]))
             table += f"║{player[element]}{' '*spaces}║"
     table += "\n╚══════════╩══════════╩══════════╩══════════╝"
+    return table
+
+def display_current_enemy():
+    if CURRENT_ENEMY == {}:
+        table = """
+╔══════════╦══════════╦══════════╦══════════╗
+║Name      ║HP        ║Level     ║XP Reward ║
+╠══════════╬══════════╬══════════╬══════════╣ 
+║          ║          ║          ║          ║
+╚══════════╩══════════╩══════════╩══════════╝
+        """
+    else:
+        HEADERS = f"""
+╔══════════╦══════════╦══════════╦══════════╗
+║Name      ║HP        ║Level     ║XP Reward ║
+╠══════════╬══════════╬══════════╬══════════╣ \n"""
+        table = ""
+        table += HEADERS
+        for element in CURRENT_ENEMY:
+            if element == "Name":
+                spaces = 10 - len(CURRENT_ENEMY[element])
+                table += f"║{CURRENT_ENEMY[element]}{' '*spaces}║"
+            elif element == "HP":
+                spaces = 10 - len(str(CURRENT_ENEMY[element]))
+                table += f"{CURRENT_ENEMY[element]}{' '*spaces}"
+            elif element == "Level":
+                spaces = 10 - len(str(CURRENT_ENEMY[element]))
+                table += f"║{CURRENT_ENEMY[element]}{' '*spaces}"
+            elif element == "XpReward":
+                spaces = 10 - len(str(CURRENT_ENEMY[element]))
+                table += f"║{CURRENT_ENEMY[element]}{' '*spaces}║"
+        table += "\n╚══════════╩══════════╩══════════╩══════════╝"
     return table
 
 
