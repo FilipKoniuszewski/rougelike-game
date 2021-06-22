@@ -15,7 +15,7 @@ BOARD_HEIGHT = 20
 
 # ["EffectName", turnsLeft, value]
 
-def shuffle(player):
+def shuffle_effects(player):
     to_pop = []
     for effect in util.EFFECTS:
         effect[1] -= 1
@@ -56,7 +56,7 @@ def main():
         ui.display_board(board)
         ui.print_log()
         success = False
-        shuffle(player)
+        shuffle_effects(player)
         util.remove_dead_mobs(player, board, list_of_enemies)
         while not success:
             util.clear_screen()

@@ -167,7 +167,7 @@ def remove_dead_mobs(player, board, list_of_enemies):
         if mob["HP"] <= 0:
             for item in mob["Inventory"]:
                 player["Inventory"].append(item)
-            player["Xp"] += mob["XpReward"]
+            player["Experience"] += mob["XpReward"]
             board[mob["Ypoz"]][mob["Xpoz"]] = ObjectGenerator.spawn_floor()
             list_of_enemies.remove(mob)
 
