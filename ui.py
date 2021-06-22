@@ -18,12 +18,10 @@ def display_board(board):
     print(output)
 
 def Information_board(info):
-    if len(information_board)<0:
-       information_board.append(info)
-    else:
-        information_board.insert(0,info)
+    print(information_board)
+    information_board.insert(0,info)
     if len(information_board) > 5:
-       information_board.pop(0)
+       information_board.pop(5)
   
 
 def print_log():
