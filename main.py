@@ -42,10 +42,12 @@ def main():
     while True:
         util.clear_screen()
         ui.display_board(board)
+        ui.print_log()
         success = False
         while not success:
             util.clear_screen()
             ui.display_board(board)
+            ui.print_log()
             success = util.move_player(board, player)
         if enemy_turn:
             util.enemy_activity(board, list_of_enemies)
