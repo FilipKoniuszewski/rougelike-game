@@ -4,7 +4,7 @@ import ui
 import ObjectGenerator
 import random
 import time
-
+import os
 
 PLAYER_ICON = '@'
 PLAYER_START_X = 3
@@ -46,7 +46,39 @@ def main():
         while not success:
             success = move_player(board, player)
         enemy_activity(board, list_of_enemies)
-        
+
+def display_inventory(inventory):
+    """Display the contents of the inventory in a simple way."""
+
+inventory = {}
+
+
+display_inventory(inventory)
+
+
+def add_to_inventory(inventory, added_items):
+    """Add to the inventory dictionary a list of items from added_items."""
+added_items = {
+"FOOD":0,
+"WEPON":0,
+"ARMOR" :0,
+"SPECIAL ITEMS":0,} 
+
+inventory.update(added_items)
+
+add_to_inventory(inventory, added_items)
+
+def print_table():
+    print(f"""
+    !BACKPACK!
+    -----------------
+    item name | count
+    -----------------""")
+    for key, value in inventory.items():
+        print(key, ' : ', value ,)
+    print("-----------------")
+
+    os.system('pause')       
 
 
 def add_enemies(board, amount, list_of_enemies):
@@ -137,6 +169,9 @@ def move_player(board, player):
                 return False
         else:
             return False
+    elif pressed_key == "i":
+        print_table()
+        return False        
     else:
         return False
     return True
