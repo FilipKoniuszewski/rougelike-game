@@ -57,6 +57,7 @@ def main():
         ui.print_log()
         success = False
         shuffle(player)
+        util.remove_dead_mobs(player, board, list_of_enemies)
         while not success:
             util.clear_screen()
             print(engine.display_statistics(player))

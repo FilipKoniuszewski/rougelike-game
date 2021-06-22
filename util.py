@@ -162,7 +162,14 @@ def add_enemies(board, amount, list_of_enemies):
         engine.put_player_on_board(board, temp)
         list_of_enemies.append(temp)
 
-
+def remove_dead_mobs(player, board, list_of_enemies):
+    for mob in list_of_enemies:
+        if mob["HP"] <= 0:
+            for item in mob["Inventory"]:
+                player["Inventory"].append(item)
+            player["Xp"] += mob["XpReward"]
+            board[mob["Ypoz"]][mob["Xpoz"]] = ObjectGenerator.spawn_floor()
+            list_of_enemies.remove(mob)
 
 def add_to_inventory(inventory, added_items):
     """Add to the inventory dictionary a list of items from added_items."""
