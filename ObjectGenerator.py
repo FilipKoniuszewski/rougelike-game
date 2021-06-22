@@ -20,3 +20,4 @@ def spawn_scooby_crunch():
 
 def spawn_floor():
     return {"Name":"Floor", "Type":"Map", "Symbol":".", "Walkable":True}
+
