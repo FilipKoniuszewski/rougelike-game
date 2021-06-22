@@ -50,7 +50,7 @@ def Attack_chances(attacker:dict,defender):
             defender["HP"] -= (attacker["BaseDamage"]*2)  
         else:
             defender["HP"] -= attacker["BaseDamage"]
-            ui.Information_board(f"{attacker['Name']} managed to attack and dealed {attacker['BaseDamage']} damage to defender")
+            ui.Information_board(f"{attacker['Name']} managed to attack and dealed {attacker['BaseDamage']} damage to {defender['Name']}")
 
 def move_player(board, player):
     pressed_key = key_pressed()
@@ -110,37 +110,44 @@ def move_player(board, player):
         return False
     return True
 
-def enemy_activity(board, list_of_enemies):
+def enemy_activity(board, list_of_enemies, player):
     for enemy in list_of_enemies:
         success = False
-        # if board[enemy["Ypoz"] - 1][enemy["Xpoz"]]
-
-        while not success:
-            x = random.randint(0, 4)
-            if x == 0:
-                if enemy["Ypoz"] - 1 >= 0 and board[enemy["Ypoz"] - 1][enemy["Xpoz"]]["Walkable"]:
-                    board[enemy["Ypoz"] - 1][enemy["Xpoz"]] = enemy
-                    board[enemy["Ypoz"]][enemy["Xpoz"]] = ObjectGenerator.spawn_floor()
-                    enemy["Ypoz"] -= 1
-                    success = True
-            elif x == 1:
-                if enemy["Ypoz"] < len(board) - 1 and board[enemy["Ypoz"] + 1][enemy["Xpoz"]]["Walkable"]:
-                    board[enemy["Ypoz"] + 1][enemy["Xpoz"]] = enemy
-                    board[enemy["Ypoz"]][enemy["Xpoz"]] = ObjectGenerator.spawn_floor()
-                    enemy["Ypoz"] += 1
-                    success = True
-            elif x == 2:
-                if enemy["Xpoz"] < len(board[0]) - 1 and board[enemy["Ypoz"]][enemy["Xpoz"] + 1]["Walkable"]:
-                    board[enemy["Ypoz"]][enemy["Xpoz"] + 1] = enemy
-                    board[enemy["Ypoz"]][enemy["Xpoz"]] = ObjectGenerator.spawn_floor()
-                    enemy["Xpoz"] += 1
-                    success = True
-            elif x == 3:
-                if enemy["Xpoz"] - 1 >= 0 and board[enemy["Ypoz"]][enemy["Xpoz"] - 1]["Walkable"]:
-                    board[enemy["Ypoz"]][enemy["Xpoz"] - 1] = enemy
-                    board[enemy["Ypoz"]][enemy["Xpoz"]] = ObjectGenerator.spawn_floor()
-                    enemy["Xpoz"] -= 1
-                    success = True
+        if enemy["Ypoz"] - 1 >= 0 and board[enemy["Ypoz"] - 1][enemy["Xpoz"]]["Type"] == "Player":
+            Attack_chances(enemy, player)
+        elif enemy["Ypoz"] < len(board) - 1 and board[enemy["Ypoz"] + 1][enemy["Xpoz"]]["Type"] == "Player":
+            Attack_chances(enemy, player)
+        elif enemy["Xpoz"] < len(board[0]) - 1 and board[enemy["Ypoz"]][enemy["Xpoz"] + 1]["Type"] == "Player":
+            Attack_chances(enemy, player)   
+        elif enemy["Xpoz"] - 1 >= 0 and board[enemy["Ypoz"]][enemy["Xpoz"] - 1]["Type"] == "Player":
+            Attack_chances(enemy, player)   
+        else:
+            while not success:
+                x = random.randint(0, 4)
+                if x == 0:
+                    if enemy["Ypoz"] - 1 >= 0 and board[enemy["Ypoz"] - 1][enemy["Xpoz"]]["Walkable"]:
+                        board[enemy["Ypoz"] - 1][enemy["Xpoz"]] = enemy
+                        board[enemy["Ypoz"]][enemy["Xpoz"]] = ObjectGenerator.spawn_floor()
+                        enemy["Ypoz"] -= 1
+                        success = True
+                elif x == 1:
+                    if enemy["Ypoz"] < len(board) - 1 and board[enemy["Ypoz"] + 1][enemy["Xpoz"]]["Walkable"]:
+                        board[enemy["Ypoz"] + 1][enemy["Xpoz"]] = enemy
+                        board[enemy["Ypoz"]][enemy["Xpoz"]] = ObjectGenerator.spawn_floor()
+                        enemy["Ypoz"] += 1
+                        success = True
+                elif x == 2:
+                    if enemy["Xpoz"] < len(board[0]) - 1 and board[enemy["Ypoz"]][enemy["Xpoz"] + 1]["Walkable"]:
+                        board[enemy["Ypoz"]][enemy["Xpoz"] + 1] = enemy
+                        board[enemy["Ypoz"]][enemy["Xpoz"]] = ObjectGenerator.spawn_floor()
+                        enemy["Xpoz"] += 1
+                        success = True
+                elif x == 3:
+                    if enemy["Xpoz"] - 1 >= 0 and board[enemy["Ypoz"]][enemy["Xpoz"] - 1]["Walkable"]:
+                        board[enemy["Ypoz"]][enemy["Xpoz"] - 1] = enemy
+                        board[enemy["Ypoz"]][enemy["Xpoz"]] = ObjectGenerator.spawn_floor()
+                        enemy["Xpoz"] -= 1
+                        success = True
 
 def add_enemies(board, amount, list_of_enemies):
     for i in range(amount):

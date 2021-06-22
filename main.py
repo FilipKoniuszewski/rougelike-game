@@ -52,7 +52,7 @@ def main():
             ui.print_log()
             success = util.move_player(board, player)
         if enemy_turn:
-            util.enemy_activity(board, list_of_enemies)
+            util.enemy_activity(board, list_of_enemies, player)
             enemy_turn = False
         else:
             enemy_turn = True
