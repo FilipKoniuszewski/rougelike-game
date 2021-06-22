@@ -41,6 +41,7 @@ def main():
     enemy_turn = False
     while True:
         util.clear_screen()
+        print(engine.display_statistics(player))
         ui.display_board(board)
         ui.print_log()
         success = False
