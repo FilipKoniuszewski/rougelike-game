@@ -4,7 +4,7 @@ from random import randint
 def labrador_character():
     inventory = [spawn_scooby_snack(), spawn_scooby_snack()]
     return {"Name":"labrador","Symbol":"L", "HP": 100, "BaseDamage":15, "CriticalChance":20
-    , "DodgeChance": 60,"Type":"Player", "Symbol":"L", "Xpoz":1, "Ypoz":1
+    , "DodgeChance": 60,"Type":"Player", "Xpoz":1, "Ypoz":1
     , "Walkable":False, "MaxHP":100, "Armor":0, "lvlExp" : 0, "Inventory":inventory}
 
 def shiba_character():

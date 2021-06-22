@@ -56,8 +56,8 @@ def main():
         ui.display_board(board)
         ui.print_log()
         success = False
+        shuffle(player)
         while not success:
-            shuffle(player)
             util.clear_screen()
             print(engine.display_statistics(player))
             ui.display_board(board)

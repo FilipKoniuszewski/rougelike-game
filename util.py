@@ -109,7 +109,10 @@ def move_player(board, player):
         return False    
     elif pressed_key == "u": # testy
         use_item(player, ObjectGenerator.spawn_stick())
-        return False        
+        return False    
+    elif pressed_key == "p": # testy
+        ui.display_stats(player)
+        return False  
     else:
         return False
     return True
@@ -181,6 +184,6 @@ def use_item(player, item):
             player["HP"] = player["MaxHP"]
     if "CriticalChanceReward" in item:
         player["CriticalChance"] += item["CriticalChanceReward"]
-        EFFECTS.append(["CriticalChance", 5, item["CriticalChanceReward"]])
+        EFFECTS.append(["CriticalChance", 10, item["CriticalChanceReward"]])
 
 
