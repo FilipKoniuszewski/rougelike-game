@@ -1,6 +1,8 @@
 global information_board
 information_board = [] 
 
+import os
+
 def display_board(board):
     '''
     Displays complete game board on the screen
@@ -15,7 +17,6 @@ def display_board(board):
         output += "\n"
     print(output)
 
-
 def Information_board(info):
     if len(information_board)<0:
        information_board.append(info)
@@ -29,5 +30,16 @@ def print_log():
     for line in information_board:
         print(line)
 
+def print_table(inventory):
+    print(f"""
+    !BACKPACK!
+    -----------------
+    item name | type
+    -----------------""")
+    for item in inventory:
+        # for key, value in item["Name"], item["Type"]:
+        print(item["Name"], ' : ', item["Type"] ,)
+        print("-----------------")
 
+    os.system('pause')
 
