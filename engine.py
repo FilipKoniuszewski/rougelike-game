@@ -103,7 +103,7 @@ def create_character_class_as_table(character_type):
 def display_statistics(player):
     HEADERS = f"""
 ╔══════════╦══════════╦══════════╦══════════╗
-║Name      ║HP        ║Armor     ║lvlExp    ║
+║Name      ║HP        ║Level     ║Experience║
 ╠══════════╬══════════╬══════════╬══════════╣ \n"""
     table = ""
     table += HEADERS
@@ -114,10 +114,10 @@ def display_statistics(player):
         elif element == "HP":
             spaces = 10 - len(str(player[element]))
             table += f"{player[element]}{' '*spaces}"
-        elif element == "Armor":
+        elif element == "Level":
             spaces = 10 - len(str(player[element]))
             table += f"║{player[element]}{' '*spaces}"
-        elif element == "lvlExp":
+        elif element == "Experience":
             spaces = 10 - len(str(player[element]))
             table += f"║{player[element]}{' '*spaces}║"
     table += "\n╚══════════╩══════════╩══════════╩══════════╝"
