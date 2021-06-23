@@ -218,3 +218,52 @@ def use_item(player, item):
         EFFECTS.append(["CriticalChance", item["Duration"], item["CriticalChanceReward"]])
 
 
+def spawn_boss(board, Xpoz, Ypoz, boss_list):
+    # temp = ObjectGenerator.spawn_roof(Xpoz, Ypoz)
+    # boss_list.append(temp)
+    # board[Ypoz][Xpoz] = temp
+    temp = ObjectGenerator.spawn_tire(Ypoz - 1, Xpoz - 1)
+    boss_list.append(temp)
+    board[Ypoz - 1][Xpoz - 1] = temp
+    temp = ObjectGenerator.spawn_tire(Ypoz - 1, Xpoz + 1)
+    boss_list.append(temp)
+    board[Ypoz - 1][Xpoz + 1] = temp
+    temp = ObjectGenerator.spawn_roof(Ypoz, Xpoz)
+    boss_list.append(temp)
+    board[Ypoz][Xpoz] = temp
+    temp = ObjectGenerator.spawn_tire(Ypoz + 1, Xpoz - 1)
+    boss_list.append(temp)
+    board[Ypoz + 1][Xpoz - 1] = temp
+    temp = ObjectGenerator.spawn_tire(Ypoz + 1, Xpoz + 1)
+    boss_list.append(temp)
+    board[Ypoz + 1][Xpoz + 1] = temp
+    
+
+
+
+    # board[Ypoz][Xpoz] = ObjectGenerator.spawn_roof(Ypoz, Xpoz)
+    # board[Ypoz][Xpoz - 1] = ObjectGenerator.spawn_roof(Ypoz, Xpoz - 1)
+    # board[Ypoz][Xpoz - 2] = ObjectGenerator.spawn_hull(Ypoz, Xpoz - 2)
+    # board[Ypoz][Xpoz + 1] = ObjectGenerator.spawn_hull(Ypoz, Xpoz + 1)
+    # board[Ypoz + 1][Xpoz] = ObjectGenerator.spawn_hull(Ypoz + 1, Xpoz)
+    # board[Ypoz + 1][Xpoz + 1] = ObjectGenerator.spawn_hull(Ypoz + 1, Xpoz + 1)
+    # board[Ypoz + 1][Xpoz - 1] = ObjectGenerator.spawn_hull(Ypoz + 1, Xpoz - 1)
+    # board[Ypoz + 1][Xpoz - 2] = ObjectGenerator.spawn_hull(Ypoz + 1, Xpoz - 2)
+    # board[Ypoz - 1][Xpoz] = ObjectGenerator.spawn_hull(Ypoz - 1, Xpoz)
+    # board[Ypoz - 1][Xpoz + 1] = ObjectGenerator.spawn_hull(Ypoz - 1, Xpoz + 1)
+    # board[Ypoz - 1][Xpoz - 1] = ObjectGenerator.spawn_hull(Ypoz - 1, Xpoz - 1)
+    # board[Ypoz - 1][Xpoz - 2] = ObjectGenerator.spawn_hull(Ypoz - 1 ,Xpoz - 2)
+    # board[Ypoz + 2][Xpoz + 1] = ObjectGenerator.spawn_tire(Ypoz + 2, Xpoz + 1)
+    # board[Ypoz + 2][Xpoz + 2] = ObjectGenerator.spawn_tire(Ypoz + 2, Xpoz + 2)
+    # board[Ypoz - 2][Xpoz + 1] = ObjectGenerator.spawn_tire(Ypoz - 2, Xpoz + 1)
+    # board[Ypoz - 2][Xpoz + 2] = ObjectGenerator.spawn_tire(Ypoz - 2, Xpoz + 2)
+    # board[Ypoz + 2][Xpoz - 2] = ObjectGenerator.spawn_tire(Ypoz + 2, Xpoz - 2)
+    # board[Ypoz + 2][Xpoz - 3] = ObjectGenerator.spawn_tire(Ypoz + 2, Xpoz - 3)
+    # board[Ypoz - 2][Xpoz - 2] = ObjectGenerator.spawn_tire(Ypoz - 2, Xpoz - 2)
+    # board[Ypoz - 2][Xpoz - 3] = ObjectGenerator.spawn_tire(Ypoz - 2, Xpoz - 3)
+
+
+
+
+
+

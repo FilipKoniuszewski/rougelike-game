@@ -66,3 +66,17 @@ def spawn_dead_mouse():
 
 def spawn_boar_horn():
     return {"Name": "Boar horn"}
+
+Boss_hp = 500
+
+def spawn_tire(Ypoz, Xpoz):
+    return {"Name":"Dog catcher", "Symbol":"X", "Xpoz":Xpoz, "Ypoz":Ypoz, "Type":"Enemy", "HP":Boss_hp, "BaseDamage":30, "CriticalChance":15, "DodgeChance": 20
+    , "XpReward": 100, "Walkable":False}
+
+def spawn_hull(Ypoz, Xpoz):
+    return {"Name":"Dog catcher", "Symbol":"#", "Xpoz":Xpoz, "Ypoz":Ypoz, "Type":"Enemy", "HP":Boss_hp, "BaseDamage":30, "CriticalChance":15, "DodgeChance": 20
+    , "XpReward": 100, "Walkable":False}
+
+def spawn_roof(Ypoz, Xpoz):
+    return {"Name":"Dog catcher", "Symbol":"O", "Xpoz":Xpoz, "Ypoz":Ypoz, "Type":"Enemy", "HP":Boss_hp, "BaseDamage":30, "CriticalChance":15, "DodgeChance": 20
+    , "XpReward": 100, "Walkable":False}
