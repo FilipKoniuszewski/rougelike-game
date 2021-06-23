@@ -5,7 +5,6 @@ import ObjectGenerator
 import random
 import time
 import os
-# import winsound
 
 PLAYER_ICON = '@'
 PLAYER_START_X = 3
@@ -77,8 +76,5 @@ def main():
 
 
 if __name__ == '__main__':
-    # while True:
-    #     winsound.Beep(200,100)
-
     main()
 
