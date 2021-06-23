@@ -28,11 +28,10 @@ def Information_board(info):
   
 
 def print_log():
+    print("\n")
     for i in range(len(information_board) - 1, -1, -1):
         print(information_board[i])
 
-    # for line in information_board:
-    #     print(line)
 
 def print_table(inventory):
     print(f"""
@@ -72,14 +71,18 @@ def display_stats(player):
                 table += f"│{stat}{spaces*' '}{player[stat]}│\n"
     table += f"""└{20*'─'}┘\n"""
     print(table)
-
-def atributes(player):
     if player["Atributes"] != 0:
         print("""\n
     ┌─────────────────────────────────┐
     │You have new atributes. Press [g]│
     └─────────────────────────────────┘
         """)
+    user_input = util.key_pressed()
+    if user_input == "g":
+        atributes(player)
+
+
+def atributes(player):
         if util.key_pressed() == "g":
             util.clear_screen()
             enchant = 0
@@ -132,7 +135,6 @@ def display_atributes(player):
     table += f"""└{20*'─'}┘\n"""
     return table
 
-
 def display_atribute_to_distribute(enchant):
     table = ""
     table += f"┌{41*'─'}┐\n"
@@ -155,13 +157,13 @@ def display_atribute_to_distribute(enchant):
     table += f"└{41*'─'}┘\n"
     return table
 
-def experience_level_check(x):
-    if x["Experience"] > x["Level"] * 500:
-       x["Experience"] -= x["Level"] * 500
-       x["Level"]+=1
-       x["HP"] = x["MaxHP"]
-       x["Atributes"]+=2
-       Information_board(f"Congratulation !!! You are on level{x['Level']}")
+def experience_level_check(player):
+    if player["Experience"] > player["Level"] * 500:
+       player["Experience"] -= player["Level"] * 500
+       player["Level"]+=1
+       player["HP"] = player["MaxHP"]
+       player["Atributes"]+=2
+       Information_board(f"You entered level{player['Level']}")
     
         
     

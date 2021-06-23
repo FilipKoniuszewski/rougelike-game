@@ -119,7 +119,6 @@ def move_player(board, player):
         return False    
     elif pressed_key == "p": # testy
         ui.display_stats(player)
-        ui.atributes(player)
         return False  
     else:
         return False
@@ -205,8 +204,25 @@ def use_item(player, item):
         player["HP"] += item["HpReward"]
         if player["HP"] > player["MaxHP"]:
             player["HP"] = player["MaxHP"]
-    if "CriticalChanceReward" in item:
+    elif "CriticalChanceReward" in item:
         player["CriticalChance"] += item["CriticalChanceReward"]
+        if player["CriticalChanceReward"] > 100:
+            player["CriticalChanceReward"] = 100
         EFFECTS.append(["CriticalChance", item["Duration"], item["CriticalChanceReward"]])
+    elif "DodgeChanceReward" in item:
+        player["DodgeChance"] += item["DodgeChanceReward"]
+        if player["DodgeChanceReward"] > 100:
+            player["DodgeChanceReward"] = 100
+        EFFECTS.append("DodgeChance", item["Duration"]), item["DodgeChanceReward"]
+    elif "ArmorReward" in item:
+        player["Armor"] += item["ArmorReward"]
+        if player["DodgeChanceReward"] > 100:
+            player["DodgeChanceReward"] = 100
+        EFFECTS.append("ArmorChance", item["Duration"]), item["ArmorChanceReward"]
+    elif "BaseDamageReward" in item:
+        player["BaseDamage"] += item["BaseDamageReward"]
+        EFFECTS.append("BaseDamageChance", item["Duration"]), item["BaseChanceReward"]    
+    
+    
 
 
