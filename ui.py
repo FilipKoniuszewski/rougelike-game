@@ -61,3 +61,11 @@ def display_stats(player):
             else:
                 print(f"{stat} --- {player[stat]}")
     util.key_pressed()
+
+def experience_level_check(x):
+    if x["Experience"] > x["Level"] * 500:
+       x["Experience"] -= x["Level"] * 500
+       x["Level"]+=1
+       x["HP"] = x["MaxHP"]
+       x["Atributes"]+=2
+       Information_board(f"Congratulation !!! You are on level{x['Level']}")
