@@ -176,13 +176,14 @@ def remove_dead_mobs(player, board, list_of_enemies):
     for mob in list_of_enemies:
         if mob["HP"] <= 0:
             ui.Information_board(f"{player['Name']} has defeated {mob['Name']}")
-            winsound.Beep(300,100)
             for item in mob["Inventory"]:
                 player["Inventory"].append(item)
             player["Experience"] += mob["XpReward"]
             board[mob["Ypoz"]][mob["Xpoz"]] = ObjectGenerator.spawn_floor()
             list_of_enemies.remove(mob)
             engine.CURRENT_ENEMY = {}
+            winsound.Beep(300,100)
+
 
 def add_to_inventory(inventory, added_items):
     """Add to the inventory dictionary a list of items from added_items."""
