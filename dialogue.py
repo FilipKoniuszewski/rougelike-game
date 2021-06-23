@@ -78,11 +78,50 @@ element_3 = '''
               loading...
 '''
 
+cat_frame_1 = '''
+      |\      _,,,---,,_
+      /,`.-'`'    -.  ;-;;,_
+    |,4-  ) )-,_..;\ (  `'-'
+    '---''(_/--'  `-'\_)
+
+        loading.
+'''
+
+cat_frame_2 = '''
+      |\      _,,,,--,,_
+      /,`.-'`'    -,  ;-;,
+    |,4-  ) ),,__ ) /;  ;;
+    '---''(.'--'  (.'`.) `'
+
+        loading..
+'''
+
+cat_frame_3 = '''
+      |\      _,,,,--,,_
+      /,`.-'`'    -,  \-;,
+    |,4-  ) ),,__ ,\ (  ;;
+    '---''(.'--'  `-'`.)`'
+
+        loading...
+'''
+
+cat_frame_4 = '''
+      |\      _,,,--,,_  ,)
+      /,`.-'`'   -,  ;-;;'
+    |,4-  ) )-,_ ) /\\
+    '---''(_/--' (_/-'
+
+        loading....
+'''
+
+cat_frames = [cat_frame_1, cat_frame_2, cat_frame_3, cat_frame_4]
+
 frames = [frame_1, frame_2, frame_3]
 
 frames_2 = [element_1, element_2, element_3]
 
 def waiting_screen(frames):
+  util.clear_screen()
   range = 0
   while range <10:
     for frame in frames:
@@ -91,14 +130,6 @@ def waiting_screen(frames):
       util.clear_screen()
       range += 1
 
-def second_waiting_screen(frames_2):
-  range = 0
-  while range <10:
-    for frame in frames_2:
-      print(frame)
-      sleep(0.5)
-      util.clear_screen()
-      range += 1
 
 def dialogue_with_Benek():
     print('''
@@ -209,7 +240,6 @@ def second_dialogue_with_Benek():
     print("You: Ok then. Let's go.\n")
     key_pressed()
     util.clear_screen()
-    waiting_screen(frames)
 
 def third_dialogue_with_Benek():
   util.clear_screen()
@@ -227,32 +257,118 @@ def third_dialogue_with_Benek():
       (   ,-'`       `'-,   )
        `-'               `-'   
 ''')
+  key_pressed
+  print("Benek: Take this too.\n")
+  key_pressed()
+  print("You: Ewww! What's that? It smells so bad..\n")
+  key_pressed()
+  print("Benek: I don't know. It works on cats. Meybe you're going to need this.\n")
+  key_pressed()
+  print("You: Thank you. Be well my friend\n!")
   key_pressed()
   util.clear_screen()
-  second_waiting_screen(frames_2)
 
-def dialogue_with_cats():
-  pass
+def dialogue_with_cat():
+  util.clear_screen()
+  print("You: Oh my Dog! You scared me!\n")
+  key_pressed()
+  print('''
 
+          _..---...,""-._     ,/}/)
+       .''        ,      ``..'(/-<
+      /   _      {      )         \\
+     ;   _ `.     `.   <         a(
+   ,'   ( \  )      `.  \ __.._ .: y
+  (  <\_-) )'-.____...\  `._   //-'
+   `. `-' /-._)))      `-._)))
+     `...'         
+            STRIPE
+''')
+  print("Stripe: Is it a collar?\n")
+  key_pressed()
+  print("You: Yes, why?\n")
+  key_pressed()
+  print("Stripe: Why are you wearing it? Do you have home?\n")
+  key_pressed()
+  print("You: I lost my human. Did you see him?\n")
+  key_pressed()
+  print("Stripe: So you don't have home... give me that collar little dog.\n")
+  key_pressed()
+  print("You: I don't want to...\n")
+  key_pressed()
+  print("Stripe: You will regret it MEOOOOOOW!!!\n")
 
+def second_dialogue_with_cat():
+  util.clear_screen()
+  print('''
+         .--._ 
+         \ ).'
+          )|/
+         ''''_.''''-._
+       (        \\
+        \        )
+        )'-.    (
+       /     _.-'\\
+      /           )
+     ('-._       /
+      \        _/      
+       '-.__==''  
 
+    SACK WITH CATMINT
+\n''')
+  
+  key_pressed()
+  print("Stripe: What's that? Smells so goooood...\n")
+  print('''
+                __..--''``---....___   _..._    __
+    /// //_.-'    .-/";  `        ``<._  ``.''_ `. / // /
+   ///_.-' _..--.'_    \                    `( ) ) // //
+   / (_..-' // (< _     ;_..__               ; `' / ///
+    / // // //  `-._,_)' // / ``--...____..-' /// / //
 
-
-
-
-
-
+                STRIPE
+    ''')
+  key_pressed()
+  print("You: I'm.. gonna... go...\n")
+  key_pressed()
+  util.clear_screen
 
 
 def dialogue_with_boar():
-  pass
+  print('''
+  
+              _,-""""-..__
+         |`,-'_. `  ` ``  `--'""".
+         ;  ,'  | ``  ` `  ` ```  `.
+       ,-'   ..-' ` ` `` `  `` `  ` |==.
+     ,'    ^    `  `    `` `  ` `.  ;   \\
+    `}_,-^-   _ .  ` \ `  ` __ `   ;    #
+       `"---"' `-`. ` \---""`.`.  `;
+                  \\` ;       ; `. `,
+                   ||`;      / / | |
+                  //_;`    ,_;' ,_;"
+                  
+                MR BOAR
+''')
+  print("Mr Boar: Oink oink!\n")
+  key_pressed()
+  print("You: *sneaking*\n")
+  key_pressed()
+  print("Mr Boar: YOU! I'M GONNA RAM YOU!!!!!!!\n")
+  key_pressed()
 
 
 
 
 
-if __name__ == "__main__": 
-  #dialogue_with_Benek()
-  #key_pressed()
-  #second_dialogue_with_Benek()
+if __name__ == "__main__":
+  dialogue_with_Benek()
+  second_dialogue_with_Benek()
+  waiting_screen(frames)
   third_dialogue_with_Benek()
+  waiting_screen(frames_2)
+  dialogue_with_cat()
+  key_pressed()
+  second_dialogue_with_cat()
+  waiting_screen(cat_frames)
+  dialogue_with_boar()
