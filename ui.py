@@ -26,10 +26,11 @@ def Information_board(info):
   
 
 def print_log():
-    print("\n")
     for i in range(len(information_board) - 1, -1, -1):
         print(information_board[i])
 
+    # for line in information_board:
+    #     print(line)
 
 def print_table(inventory):
     print(f"""
@@ -59,4 +60,12 @@ def display_stats(player):
                 additional = 0
             else:
                 print(f"{stat} --- {player[stat]}")
-    os.system("pause")
+    util.key_pressed()
+
+def experience_level_check(x):
+    if x["Experience"] > x["Level"] * 500:
+       x["Experience"] -= x["Level"] * 500
+       x["Level"]+=1
+       x["HP"] = x["MaxHP"]
+       x["Atributes"]+=2
+       Information_board(f"Congratulation !!! You are on level{x['Level']}")
