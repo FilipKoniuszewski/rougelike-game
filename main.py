@@ -58,6 +58,7 @@ def main():
         success = False
         shuffle_effects(player)
         util.remove_dead_mobs(player, board, list_of_enemies)
+        ui.experience_level_check(player)
         while not success:
             util.clear_screen()
             print(engine.display_statistics(player))

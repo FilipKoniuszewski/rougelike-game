@@ -45,7 +45,7 @@ def print_table(inventory):
         print(item["Name"], ' : ', item["Type"] ,)
         print("-----------------")
 
-    player_input = util.key_pressed()
+    util.key_pressed()
 
 def display_stats(player):
     util.clear_screen()
@@ -154,6 +154,14 @@ def display_atribute_to_distribute(enchant):
         table += f"│{type['Name']}{spaces*' '}│{type['Enchant']}│\n"
     table += f"└{41*'─'}┘\n"
     return table
+
+def experience_level_check(x):
+    if x["Experience"] > x["Level"] * 500:
+       x["Experience"] -= x["Level"] * 500
+       x["Level"]+=1
+       x["HP"] = x["MaxHP"]
+       x["Atributes"]+=2
+       Information_board(f"Congratulation !!! You are on level{x['Level']}")
     
         
     
