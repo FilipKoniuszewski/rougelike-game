@@ -4,7 +4,7 @@ import random
 import ui
 import ObjectGenerator
 import engine
-import AppKit
+#import AppKit
 EFFECTS = []
 KILL_COUNT = 0
 STEPS_COUNT = 0
@@ -55,12 +55,12 @@ def Attack_chances(attacker:dict,defender):
             ui.Information_board(f"{attacker['Name']} dealt critical damage: {attacker['BaseDamage']*2} to {defender['Name']}")
             defender["HP"] -= (attacker["BaseDamage"]*2)  
             #winsound.Beep(250,100)
-            AppKit.NSBeep()
+            #AppKit.NSBeep()
         else:
             defender["HP"] -= attacker["BaseDamage"]
             ui.Information_board(f"{attacker['Name']} dealt damage: {attacker['BaseDamage']} to {defender['Name']}")
             #winsound.Beep(200,100)
-            AppKit.NSBeep()
+            #AppKit.NSBeep()
 def move_player(board, player):
     pressed_key = key_pressed()
     if pressed_key == "w":
