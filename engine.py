@@ -127,13 +127,7 @@ def display_statistics(player):
 
 def display_current_enemy():
     if CURRENT_ENEMY == {}:
-        table = """
-╔══════════╦══════════╦══════════╦══════════╗
-║Name      ║HP        ║Level     ║XP Reward ║
-╠══════════╬══════════╬══════════╬══════════╣ 
-║          ║          ║          ║          ║
-╚══════════╩══════════╩══════════╩══════════╝
-        """
+        table = "\n\n\n\n\n"
     else:
         HEADERS = f"""
 ╔══════════╦══════════╦══════════╦══════════╗
@@ -156,6 +150,41 @@ def display_current_enemy():
                 table += f"║{CURRENT_ENEMY[element]}{' '*spaces}║"
         table += "\n╚══════════╩══════════╩══════════╩══════════╝"
     return table
+    
+
+def display_end_screen(player):
+    counters = [util.KILL_COUNT,util.STEPS_COUNT,util.CRITICAL_HITS]
+    table = ""
+    table += "YOU LOST THE GAME\nSTATISTICS\n"
+    table += "╔══════════╦══════════╗\n"
+    for element in player:
+        if element == "Name":
+            spaces = 10 - len(str(player[element]))
+            table += f"║Name{6*' '}║{player[element]}{' '*spaces}║\n"
+            table += f"╠{10*'═'}╬{10*'═'}╣\n"
+        elif element == "Level":
+            spaces = 10 - len(str(player[element]))
+            table += f"║Level{5*' '}║{player[element]}{' '*spaces}║\n"
+            table += f"╠{10*'═'}╬{10*'═'}╣\n"
+        elif element == "Experience":
+            spaces = 10 - len(str(player[element]))
+            table += f"║Experience║{player[element]}{' '*spaces}║\n"
+            table += f"╠{10*'═'}╬{10*'═'}╣\n"
+    for info in range(len(counters)):
+        if info == 0:
+            spaces = 10 - len(str(util.KILL_COUNT))
+            table += f"║Kills{5*' '}║{util.KILL_COUNT}{' '*spaces}║\n"
+            table += f"╠{10*'═'}╬{10*'═'}╣\n"
+        elif info == 1:
+            spaces = 10 - len(str(util.STEPS_COUNT))
+            table += f"║Steps{5*' '}║{util.STEPS_COUNT}{' '*spaces}║\n"
+            table += f"╠{10*'═'}╬{10*'═'}╣\n"
+        else:
+            spaces = 10 - len(str(util.CRITICAL_HITS))
+            table += f"║Criticals{1*' '}║{util.CRITICAL_HITS}{' '*spaces}║\n"
+    table += "╚══════════╩══════════╝"
+    return table
+
 
 
 

@@ -26,11 +26,10 @@ def Information_board(info):
   
 
 def print_log():
+    print("\n")
     for i in range(len(information_board) - 1, -1, -1):
         print(information_board[i])
 
-    # for line in information_board:
-    #     print(line)
 
 def print_table(inventory):
     print(f"""

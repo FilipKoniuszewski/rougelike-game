@@ -5,7 +5,7 @@ import ObjectGenerator
 import random
 import time
 import os
-import winsound
+# import winsound
 
 PLAYER_ICON = '@'
 PLAYER_START_X = 3
@@ -49,9 +49,8 @@ def main():
     # engine.put_player_on_board(board, ObjectGenerator.spawn_dogge(5,3))
     list_of_enemies = []
     util.add_enemies(board, 3, list_of_enemies)
-
     enemy_turn = False
-    while True:
+    while player["HP"] > 0:
         util.clear_screen()
         print(engine.display_statistics(player))
         print(engine.display_current_enemy())
@@ -67,9 +66,11 @@ def main():
             ui.display_board(board)
             ui.print_log()
             success = util.move_player(board, player)
-        
         if enemy_turn:
             util.enemy_activity(board, list_of_enemies, player)
+            if player["HP"] <= 0:
+                util.clear_screen()
+                print(engine.display_end_screen(player))
             enemy_turn = False
         else:
             enemy_turn = True
