@@ -56,6 +56,8 @@ Press [d] next character
 Press [a] previous character\n""")
         player_input = util.key_pressed()
         if player_input == 'e':
+            player_input = input("Put name of your character: ")
+            character_type["Name"] = player_input
             util.clear_screen()
             return character_type
         elif player_input == 'd':
@@ -79,7 +81,8 @@ Press [a] previous character\n""")
         else:
             util.clear_screen()
             print("Invalid type\n")
-            time.sleep(1.5)
+            time.sleep(1)
+            util.clear_screen()
             continue
 
 def create_character_class_as_table(character_type):

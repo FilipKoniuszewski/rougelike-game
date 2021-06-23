@@ -128,6 +128,7 @@ def move_player(board, player):
         return False    
     elif pressed_key == "p": # testy
         ui.display_stats(player)
+        ui.atributes(player)
         return False  
     else:
         return False
