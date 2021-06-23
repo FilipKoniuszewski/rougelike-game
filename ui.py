@@ -3,6 +3,8 @@ information_board = []
 
 import os
 import util
+import time
+import ObjectGenerator
 
 def display_board(board):
     '''
@@ -26,11 +28,10 @@ def Information_board(info):
   
 
 def print_log():
+    print("\n")
     for i in range(len(information_board) - 1, -1, -1):
         print(information_board[i])
 
-    # for line in information_board:
-    #     print(line)
 
 def print_table(inventory):
     print(f"""
@@ -43,21 +44,158 @@ def print_table(inventory):
         print(item["Name"], ' : ', item["Type"] ,)
         print("-----------------")
 
-    os.system('pause')
+    util.key_pressed()
 
 def display_stats(player):
     util.clear_screen()
     additional = 0
+    table = ""
+    table += "STATISTICS\n"
+    table += f"""┌{20*'─'}┐\n"""
     for stat in player:
-        if not stat in ["Symbol", "Type", "Xpoz", "Ypoz", "Walkable", "Inventory"]:
+        if not stat in ["Symbol", "Type", "Xpoz", "Ypoz", "Walkable", "Inventory", "Atributes"]:
             for effect in util.EFFECTS:
                 if effect[0] == stat:
                     additional += effect[2]
-                    # print(f"{stat} --- {player[stat] - effect[2]} + {effect[2]}")
-                    # break
             if additional != 0:
-                print(f"{stat} --- {player[stat] - additional} + {additional}")
+                count_spaces = f"{player[stat] - additional}+{additional}"
+                spaces = 20 - len(stat) - len(str(count_spaces))
+                if stat != "Name":
+                    table += f"""├{20*'─'}┤\n"""
+                table += f"│{stat}{spaces*' '}{player[stat] - additional}+{additional}│\n"
                 additional = 0
             else:
-                print(f"{stat} --- {player[stat]}")
-    util.key_pressed()
+                spaces = 20 - len(stat) - len(str(player[stat]))
+                if stat != "Name":
+                    table += f"""├{20*'─'}┤\n"""
+                table += f"│{stat}{spaces*' '}{player[stat]}│\n"
+    table += f"""└{20*'─'}┘\n"""
+    print(table)
+    if player["Atributes"] != 0:
+        print("""\n
+    ┌─────────────────────────────────┐
+    │You have new atributes. Press [g]│
+    └─────────────────────────────────┘
+        """)
+    user_input = util.key_pressed()
+    if user_input == "g":
+        atributes(player)
+
+
+def atributes(player):
+        if util.key_pressed() == "g":
+            util.clear_screen()
+            enchant = 0
+            while player["Atributes"] > 0:
+                util.clear_screen()
+                if enchant > 3:
+                    enchant = 0
+                elif enchant < 0:
+                    enchant = 3
+                print(display_atributes(player))
+                print(f"\nDistribute your {player['Atributes']} points\n")
+                print(display_atribute_to_distribute(enchant))
+                print("""
+Press [g] to choose this enchant
+Press [d] to next enchant
+Press [a] to previous enchant""")
+                user_input = util.key_pressed()
+                if user_input == "g":
+                    if enchant == 0:
+                        player["BaseDamage"] += 15
+                        player['Atributes'] -= 1
+                    elif enchant == 1:
+                        player["MaxHP"] += 25
+                        player['Atributes'] -= 1
+                    elif enchant == 2:
+                        player["DodgeChance"] += 10
+                        player['Atributes'] -= 1
+                    elif enchant == 3:
+                        player["CriticalChance"] += 10
+                        player['Atributes'] -= 1
+                elif user_input == "d":
+                    enchant += 1
+                    continue      
+                elif user_input == "a":
+                    enchant -= 1
+                    continue 
+                else:
+                    util.clear_screen()
+                    break
+
+def display_atributes(player):
+    table = ""
+    table += f"""┌{20*'─'}┐\n"""
+    for stat in player:
+        if not stat in ["Symbol", "Type", "Xpoz", "Ypoz", "Walkable", "Inventory","Atributes"]:
+            spaces = 20 - len(stat) - len(str(player[stat]))
+            if stat != "Name":
+                table += f"""├{20*'─'}┤\n"""
+            table += f"│{stat}{spaces*' '}{player[stat]}│\n"
+    table += f"""└{20*'─'}┘\n"""
+    return table
+
+def display_atribute_to_distribute(enchant):
+    table = ""
+    table += f"┌{41*'─'}┐\n"
+    if enchant == 0:
+        type = ObjectGenerator.strength_atribute()
+        spaces = 40 - len(type["Name"]) - len(type["Enchant"])
+        table += f"│{type['Name']}{spaces*' '}│{type['Enchant']}│\n"
+    elif enchant == 1:
+        type = ObjectGenerator.vitality_atribute()
+        spaces = 40 - len(type["Name"]) - len(type["Enchant"])
+        table += f"│{type['Name']}{spaces*' '}│{type['Enchant']}│\n"
+    elif enchant == 2:
+        type = ObjectGenerator.speed_atribute()
+        spaces = 40 - len(type["Name"]) - len(type["Enchant"])
+        table += f"│{type['Name']}{spaces*' '}│{type['Enchant']}│\n"
+    elif enchant == 3:
+        type = ObjectGenerator.crit_atribute()
+        spaces = 40 - len(type["Name"]) - len(type["Enchant"])
+        table += f"│{type['Name']}{spaces*' '}│{type['Enchant']}│\n"
+    table += f"└{41*'─'}┘\n"
+    return table
+
+def inventory_menagment(player):
+    inx=1
+    for item in player['Inventory']:
+        print(f"{inx}- {item['Name']}")
+        inx+=1
+    success=False
+    while not success:
+        user_input=util.key_pressed()
+        if user_input.isdigit():
+            if int(user_input)>len(player['Inventory']):
+                print("Out of range")
+            else:
+                util.use_item(player,player['Inventory'][int(user_input)-1])
+                player['Inventory'].pop(int(user_input)-1)
+                success=True
+        if user_input =='c':
+        
+            
+            success=True
+
+def experience_level_check(player):
+    if player["Experience"] > player["Level"] * 500:
+       player["Experience"] -= player["Level"] * 500
+       player["Level"]+=1
+       player["HP"] = player["MaxHP"]
+       player["Atributes"]+=2
+       Information_board(f"You entered level{player['Level']}")
+    
+        
+    
+        
+
+    
+
+
+
+
+
+
+
+
+

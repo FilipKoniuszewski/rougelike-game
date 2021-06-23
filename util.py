@@ -4,11 +4,12 @@ import random
 import ui
 import ObjectGenerator
 import engine
-import winsound
 EFFECTS = []
 KILL_COUNT = 0
 STEPS_COUNT = 0
 CRITICAL_HITS = 0
+Nail_flag = False
+Boss_stun = 0
 
 def key_pressed():
     try:
@@ -54,20 +55,25 @@ def Attack_chances(attacker:dict,defender):
             CRITICAL_HITS += 1
             ui.Information_board(f"{attacker['Name']} dealt critical damage: {attacker['BaseDamage']*2} to {defender['Name']}")
             defender["HP"] -= (attacker["BaseDamage"]*2)  
-            winsound.Beep(250,100)
         else:
             defender["HP"] -= attacker["BaseDamage"]
             ui.Information_board(f"{attacker['Name']} dealt damage: {attacker['BaseDamage']} to {defender['Name']}")
-            winsound.Beep(200,100)
+
+
 def move_player(board, player):
     pressed_key = key_pressed()
+    global Nail_flag
     if pressed_key == "w":
         if player["Ypoz"] - 1 >= 0:
             if board[player["Ypoz"] - 1][player["Xpoz"]]["Walkable"]:
                 board[player["Ypoz"] - 1][player["Xpoz"]] = player
-                board[player["Ypoz"]][player["Xpoz"]] = ObjectGenerator.spawn_floor()
+                
+                if Nail_flag:
+                    board[player["Ypoz"]][player["Xpoz"]] = ObjectGenerator.spawn_nail()
+                    Nail_flag = False
+                else:
+                    board[player["Ypoz"]][player["Xpoz"]] = ObjectGenerator.spawn_floor()
                 player["Ypoz"] -= 1
-                winsound.Beep(150,100)
             elif board[player["Ypoz"] - 1][player["Xpoz"]]["Type"] == "Enemy":
                 Attack_chances(player, board[player["Ypoz"] - 1][player["Xpoz"]])
                 engine.CURRENT_ENEMY = board[player["Ypoz"] - 1][player["Xpoz"]]
@@ -79,9 +85,12 @@ def move_player(board, player):
         if player["Ypoz"] < len(board) - 1:
             if board[player["Ypoz"] + 1][player["Xpoz"]]["Walkable"]:
                 board[player["Ypoz"] + 1][player["Xpoz"]] = player
-                board[player["Ypoz"]][player["Xpoz"]] = ObjectGenerator.spawn_floor()
+                if Nail_flag:
+                    board[player["Ypoz"]][player["Xpoz"]] = ObjectGenerator.spawn_nail()
+                    Nail_flag = False
+                else:
+                    board[player["Ypoz"]][player["Xpoz"]] = ObjectGenerator.spawn_floor()
                 player["Ypoz"] += 1
-                winsound.Beep(150,100)
             elif board[player["Ypoz"] + 1][player["Xpoz"]]["Type"] == "Enemy":
                 Attack_chances(player,board[player["Ypoz"] + 1][player["Xpoz"]])
                 engine.CURRENT_ENEMY = board[player["Ypoz"] + 1][player["Xpoz"]]
@@ -93,9 +102,12 @@ def move_player(board, player):
         if player["Xpoz"] < len(board[0]) - 1:
             if board[player["Ypoz"]][player["Xpoz"] + 1]["Walkable"]:
                 board[player["Ypoz"]][player["Xpoz"] + 1] = player
-                board[player["Ypoz"]][player["Xpoz"]] = ObjectGenerator.spawn_floor()
+                if Nail_flag:
+                    board[player["Ypoz"]][player["Xpoz"]] = ObjectGenerator.spawn_nail()
+                    Nail_flag = False
+                else:
+                    board[player["Ypoz"]][player["Xpoz"]] = ObjectGenerator.spawn_floor()
                 player["Xpoz"] += 1
-                winsound.Beep(150,100)
             elif board[player["Ypoz"]][player["Xpoz"] + 1]["Type"] == "Enemy":
                 Attack_chances(player,board[player["Ypoz"]][player["Xpoz"] + 1])
                 engine.CURRENT_ENEMY = board[player["Ypoz"]][player["Xpoz"] + 1]
@@ -107,9 +119,12 @@ def move_player(board, player):
         if player["Xpoz"] - 1 >= 0:
             if board[player["Ypoz"]][player["Xpoz"] - 1]["Walkable"]:
                 board[player["Ypoz"]][player["Xpoz"] - 1] = player
-                board[player["Ypoz"]][player["Xpoz"]] = ObjectGenerator.spawn_floor()
+                if Nail_flag:
+                    board[player["Ypoz"]][player["Xpoz"]] = ObjectGenerator.spawn_nail()
+                    Nail_flag = False
+                else:
+                    board[player["Ypoz"]][player["Xpoz"]] = ObjectGenerator.spawn_floor()
                 player["Xpoz"] -= 1
-                winsound.Beep(150,100)
             elif board[player["Ypoz"]][player["Xpoz"] - 1]["Type"] == "Enemy":
                 Attack_chances(player,board[player["Ypoz"]][player["Xpoz"] - 1])
                 engine.CURRENT_ENEMY = board[player["Ypoz"]][player["Xpoz"] - 1]
@@ -119,7 +134,7 @@ def move_player(board, player):
             return False
     elif pressed_key == "i":
         clear_screen()
-        ui.print_table(player["Inventory"])
+        ui.inventory_menagment(player)
         return False    
     elif pressed_key == "u": # testy
         use_item(player, ObjectGenerator.spawn_stick())
@@ -185,14 +200,12 @@ def remove_dead_mobs(player, board, list_of_enemies):
             ui.Information_board(f"{player['Name']} has defeated {mob['Name']}")
             global KILL_COUNT
             KILL_COUNT += 1
-            winsound.Beep(300,100)
             for item in mob["Inventory"]:
                 player["Inventory"].append(item)
             player["Experience"] += mob["XpReward"]
             board[mob["Ypoz"]][mob["Xpoz"]] = ObjectGenerator.spawn_floor()
             list_of_enemies.remove(mob)
             engine.CURRENT_ENEMY = {}
-            winsound.Beep(300,100)
 
 
 def add_to_inventory(inventory, added_items):
@@ -209,13 +222,33 @@ def add_to_inventory(inventory, added_items):
 
 
 def use_item(player, item):
+    global Nail_flag
     if "HpReward" in item:
         player["HP"] += item["HpReward"]
         if player["HP"] > player["MaxHP"]:
             player["HP"] = player["MaxHP"]
-    if "CriticalChanceReward" in item:
+    elif "CriticalChanceReward" in item:
         player["CriticalChance"] += item["CriticalChanceReward"]
+        if player["CriticalChanceReward"] > 100:
+            player["CriticalChanceReward"] = 100
         EFFECTS.append(["CriticalChance", item["Duration"], item["CriticalChanceReward"]])
+    elif "DodgeChanceReward" in item:
+        player["DodgeChance"] += item["DodgeChanceReward"]
+        if player["DodgeChanceReward"] > 100:
+            player["DodgeChanceReward"] = 100
+        EFFECTS.append("DodgeChance", item["Duration"]), item["DodgeChanceReward"]
+    elif "ArmorReward" in item:
+        player["Armor"] += item["ArmorReward"]
+        if player["DodgeChanceReward"] > 100:
+            player["DodgeChanceReward"] = 100
+        EFFECTS.append("ArmorChance", item["Duration"]), item["ArmorChanceReward"]
+    elif "BaseDamageReward" in item:
+        player["BaseDamage"] += item["BaseDamageReward"]
+        EFFECTS.append("BaseDamageChance", item["Duration"]), item["BaseChanceReward"]    
+    elif item["Name"] == "Nail":
+        Nail_flag = True
+
+    
 
 
 def spawn_boss(board, Xpoz, Ypoz, boss_list):
@@ -239,29 +272,55 @@ def spawn_boss(board, Xpoz, Ypoz, boss_list):
     board[Ypoz + 1][Xpoz + 1] = temp
     
 
+def move_boss(player, board, boss_list):
+    global Boss_stun
+    attacked = hit_boss(player, board, boss_list)
+    if not attacked:
+        for item in boss_list:
+            if item["Symbol"] == "O":
+                Xmid = item["Xpoz"]
+                Ymid = item["Ypoz"]
+        direction = random.randint(0, 3)
+        if Ymid > 2 and direction == 0:
+            for part in boss_list:#move up
+                if board[part["Ypoz"] - 1][part["Xpoz"]]["Name"] == "Nail":
+                    Boss_stun = 7
+                part["Ypoz"] -= 1
+                board[part["Ypoz"]][part["Xpoz"]] = part
+                board[part["Ypoz"] + 1][part["Xpoz"]] = ObjectGenerator.spawn_floor()
+        if Xmid > 2 and direction == 1:
+            for part in boss_list:#move left
+                if board[part["Ypoz"]][part["Xpoz"] - 1]["Name"] == "Nail":
+                    Boss_stun = 7
+                part["Xpoz"] -= 1
+                board[part["Ypoz"]][part["Xpoz"]] = part
+                board[part["Ypoz"]][part["Xpoz"] + 1] = ObjectGenerator.spawn_floor()
+        if Xmid < len(board[0]) - 3 and direction == 2:
+            for part in boss_list:#move right
+                if board[part["Ypoz"]][part["Xpoz"] + 1]["Name"] == "Nail":
+                    Boss_stun = 7
+                part["Xpoz"] += 1
+                board[part["Ypoz"]][part["Xpoz"]] = part
+                board[part["Ypoz"]][part["Xpoz"] - 1] = ObjectGenerator.spawn_floor()
+        if Ymid < len(board) - 3 and direction == 3:
+            for part in boss_list:#move down
+                if board[part["Ypoz"] + 1][part["Xpoz"]]["Name"] == "Nail":
+                    Boss_stun = 7
+                part["Ypoz"] += 1
+                board[part["Ypoz"]][part["Xpoz"]] = part
+                board[part["Ypoz"] - 1][part["Xpoz"]] = ObjectGenerator.spawn_floor()
 
+def hit_boss(player, board, boss_list):
+    for part in boss_list:
+        if board[part["Ypoz"] + 1][part["Xpoz"]]["Type"] == "Player" or board[part["Ypoz"] - 1][part["Xpoz"]]["Type"] == "Player":
+            Attack_chances(part, player)
+            return True
+        elif board[part["Ypoz"]][part["Xpoz"] + 1]["Type"] == "Player" or board[part["Ypoz"]][part["Xpoz"] - 1]["Type"] == "Player":
+            Attack_chances(part, player)
+            return True
+    return False
 
-    # board[Ypoz][Xpoz] = ObjectGenerator.spawn_roof(Ypoz, Xpoz)
-    # board[Ypoz][Xpoz - 1] = ObjectGenerator.spawn_roof(Ypoz, Xpoz - 1)
-    # board[Ypoz][Xpoz - 2] = ObjectGenerator.spawn_hull(Ypoz, Xpoz - 2)
-    # board[Ypoz][Xpoz + 1] = ObjectGenerator.spawn_hull(Ypoz, Xpoz + 1)
-    # board[Ypoz + 1][Xpoz] = ObjectGenerator.spawn_hull(Ypoz + 1, Xpoz)
-    # board[Ypoz + 1][Xpoz + 1] = ObjectGenerator.spawn_hull(Ypoz + 1, Xpoz + 1)
-    # board[Ypoz + 1][Xpoz - 1] = ObjectGenerator.spawn_hull(Ypoz + 1, Xpoz - 1)
-    # board[Ypoz + 1][Xpoz - 2] = ObjectGenerator.spawn_hull(Ypoz + 1, Xpoz - 2)
-    # board[Ypoz - 1][Xpoz] = ObjectGenerator.spawn_hull(Ypoz - 1, Xpoz)
-    # board[Ypoz - 1][Xpoz + 1] = ObjectGenerator.spawn_hull(Ypoz - 1, Xpoz + 1)
-    # board[Ypoz - 1][Xpoz - 1] = ObjectGenerator.spawn_hull(Ypoz - 1, Xpoz - 1)
-    # board[Ypoz - 1][Xpoz - 2] = ObjectGenerator.spawn_hull(Ypoz - 1 ,Xpoz - 2)
-    # board[Ypoz + 2][Xpoz + 1] = ObjectGenerator.spawn_tire(Ypoz + 2, Xpoz + 1)
-    # board[Ypoz + 2][Xpoz + 2] = ObjectGenerator.spawn_tire(Ypoz + 2, Xpoz + 2)
-    # board[Ypoz - 2][Xpoz + 1] = ObjectGenerator.spawn_tire(Ypoz - 2, Xpoz + 1)
-    # board[Ypoz - 2][Xpoz + 2] = ObjectGenerator.spawn_tire(Ypoz - 2, Xpoz + 2)
-    # board[Ypoz + 2][Xpoz - 2] = ObjectGenerator.spawn_tire(Ypoz + 2, Xpoz - 2)
-    # board[Ypoz + 2][Xpoz - 3] = ObjectGenerator.spawn_tire(Ypoz + 2, Xpoz - 3)
-    # board[Ypoz - 2][Xpoz - 2] = ObjectGenerator.spawn_tire(Ypoz - 2, Xpoz - 2)
-    # board[Ypoz - 2][Xpoz - 3] = ObjectGenerator.spawn_tire(Ypoz - 2, Xpoz - 3)
-
+    
 
 
 
