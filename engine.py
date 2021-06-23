@@ -3,6 +3,8 @@ import util
 import time
 import ui
 
+CURRENT_ENEMY = {}
+
 
 def create_board(width, height):
     '''
@@ -103,7 +105,7 @@ def create_character_class_as_table(character_type):
 def display_statistics(player):
     HEADERS = f"""
 ╔══════════╦══════════╦══════════╦══════════╗
-║Name      ║HP        ║Armor     ║lvlExp    ║
+║Name      ║HP        ║Level     ║Experience║
 ╠══════════╬══════════╬══════════╬══════════╣ \n"""
     table = ""
     table += HEADERS
@@ -114,14 +116,75 @@ def display_statistics(player):
         elif element == "HP":
             spaces = 10 - len(str(player[element]))
             table += f"{player[element]}{' '*spaces}"
-        elif element == "Armor":
+        elif element == "Level":
             spaces = 10 - len(str(player[element]))
             table += f"║{player[element]}{' '*spaces}"
-        elif element == "lvlExp":
+        elif element == "Experience":
             spaces = 10 - len(str(player[element]))
             table += f"║{player[element]}{' '*spaces}║"
     table += "\n╚══════════╩══════════╩══════════╩══════════╝"
     return table
+
+def display_current_enemy():
+    if CURRENT_ENEMY == {}:
+        table = "\n\n\n\n\n"
+    else:
+        HEADERS = f"""
+╔══════════╦══════════╦══════════╦══════════╗
+║Name      ║HP        ║Level     ║XP Reward ║
+╠══════════╬══════════╬══════════╬══════════╣ \n"""
+        table = ""
+        table += HEADERS
+        for element in CURRENT_ENEMY:
+            if element == "Name":
+                spaces = 10 - len(CURRENT_ENEMY[element])
+                table += f"║{CURRENT_ENEMY[element]}{' '*spaces}║"
+            elif element == "HP":
+                spaces = 10 - len(str(CURRENT_ENEMY[element]))
+                table += f"{CURRENT_ENEMY[element]}{' '*spaces}"
+            elif element == "Level":
+                spaces = 10 - len(str(CURRENT_ENEMY[element]))
+                table += f"║{CURRENT_ENEMY[element]}{' '*spaces}"
+            elif element == "XpReward":
+                spaces = 10 - len(str(CURRENT_ENEMY[element]))
+                table += f"║{CURRENT_ENEMY[element]}{' '*spaces}║"
+        table += "\n╚══════════╩══════════╩══════════╩══════════╝"
+    return table
+    
+
+def display_end_screen(player):
+    counters = [util.KILL_COUNT,util.STEPS_COUNT,util.CRITICAL_HITS]
+    table = ""
+    table += "YOU LOST THE GAME\nSTATISTICS\n"
+    table += "╔══════════╦══════════╗\n"
+    for element in player:
+        if element == "Name":
+            spaces = 10 - len(str(player[element]))
+            table += f"║Name{6*' '}║{player[element]}{' '*spaces}║\n"
+            table += f"╠{10*'═'}╬{10*'═'}╣\n"
+        elif element == "Level":
+            spaces = 10 - len(str(player[element]))
+            table += f"║Level{5*' '}║{player[element]}{' '*spaces}║\n"
+            table += f"╠{10*'═'}╬{10*'═'}╣\n"
+        elif element == "Experience":
+            spaces = 10 - len(str(player[element]))
+            table += f"║Experience║{player[element]}{' '*spaces}║\n"
+            table += f"╠{10*'═'}╬{10*'═'}╣\n"
+    for info in range(len(counters)):
+        if info == 0:
+            spaces = 10 - len(str(util.KILL_COUNT))
+            table += f"║Kills{5*' '}║{util.KILL_COUNT}{' '*spaces}║\n"
+            table += f"╠{10*'═'}╬{10*'═'}╣\n"
+        elif info == 1:
+            spaces = 10 - len(str(util.STEPS_COUNT))
+            table += f"║Steps{5*' '}║{util.STEPS_COUNT}{' '*spaces}║\n"
+            table += f"╠{10*'═'}╬{10*'═'}╣\n"
+        else:
+            spaces = 10 - len(str(util.CRITICAL_HITS))
+            table += f"║Criticals{1*' '}║{util.CRITICAL_HITS}{' '*spaces}║\n"
+    table += "╚══════════╩══════════╝"
+    return table
+
 
 
 

@@ -2,6 +2,7 @@ global information_board
 information_board = [] 
 
 import os
+import util
 
 def display_board(board):
     '''
@@ -19,15 +20,16 @@ def display_board(board):
     print(output)
 
 def Information_board(info):
-    print(information_board)
     information_board.insert(0,info)
     if len(information_board) > 5:
        information_board.pop(5)
   
 
 def print_log():
-    for line in information_board:
-        print(line)
+    print("\n")
+    for i in range(len(information_board) - 1, -1, -1):
+        print(information_board[i])
+
 
 def print_table(inventory):
     print(f"""
@@ -42,3 +44,19 @@ def print_table(inventory):
 
     os.system('pause')
 
+def display_stats(player):
+    util.clear_screen()
+    additional = 0
+    for stat in player:
+        if not stat in ["Symbol", "Type", "Xpoz", "Ypoz", "Walkable", "Inventory"]:
+            for effect in util.EFFECTS:
+                if effect[0] == stat:
+                    additional += effect[2]
+                    # print(f"{stat} --- {player[stat] - effect[2]} + {effect[2]}")
+                    # break
+            if additional != 0:
+                print(f"{stat} --- {player[stat] - additional} + {additional}")
+                additional = 0
+            else:
+                print(f"{stat} --- {player[stat]}")
+    os.system("pause")
