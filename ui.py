@@ -60,4 +60,4 @@ def display_stats(player):
                 additional = 0
             else:
                 print(f"{stat} --- {player[stat]}")
-    os.system("pause")
+    util.key_pressed()

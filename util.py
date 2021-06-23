@@ -6,7 +6,9 @@ import ObjectGenerator
 import engine
 import winsound
 EFFECTS = []
-
+KILL_COUNT = 0
+STEPS_COUNT = 0
+CRITICAL_HITS = 0
 
 def key_pressed():
     try:
@@ -45,15 +47,17 @@ def Attack_chances(attacker:dict,defender):
         random_value = random.randrange(1,101)
         tab_poss.append(random_value)
     if  tab_poss[0] <= defender["DodgeChance"]:
-        ui.Information_board(f"{attacker['Name']} attacked but {defender['Name']} managed to dodge")        
+        ui.Information_board(f"{defender['Name']} dodged {attacker['Name']} attack")        
     else:
         if tab_poss[1] <= attacker["CriticalChance"]:
-            ui.Information_board(f"{attacker['Name']} managed to do Critical attack and dealed {attacker['BaseDamage']*2} damage to {defender['Name']}")
+            global CRITICAL_HITS
+            CRITICAL_HITS += 1
+            ui.Information_board(f"{attacker['Name']} dealt critical damage: {attacker['BaseDamage']*2} to {defender['Name']}")
             defender["HP"] -= (attacker["BaseDamage"]*2)  
             winsound.Beep(250,100)
         else:
             defender["HP"] -= attacker["BaseDamage"]
-            ui.Information_board(f"{attacker['Name']} managed to attack and dealed {attacker['BaseDamage']} damage to {defender['Name']}")
+            ui.Information_board(f"{attacker['Name']} dealt damage: {attacker['BaseDamage']} to {defender['Name']}")
             winsound.Beep(200,100)
 def move_player(board, player):
     pressed_key = key_pressed()
@@ -125,6 +129,9 @@ def move_player(board, player):
         return False  
     else:
         return False
+
+    global STEPS_COUNT
+    STEPS_COUNT += 1
     return True
 
 def enemy_activity(board, list_of_enemies, player):
@@ -176,6 +183,9 @@ def remove_dead_mobs(player, board, list_of_enemies):
     for mob in list_of_enemies:
         if mob["HP"] <= 0:
             ui.Information_board(f"{player['Name']} has defeated {mob['Name']}")
+            global KILL_COUNT
+            KILL_COUNT += 1
+            winsound.Beep(300,100)
             for item in mob["Inventory"]:
                 player["Inventory"].append(item)
             player["Experience"] += mob["XpReward"]
