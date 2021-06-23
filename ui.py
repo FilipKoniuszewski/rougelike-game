@@ -157,6 +157,26 @@ def display_atribute_to_distribute(enchant):
     table += f"└{41*'─'}┘\n"
     return table
 
+def inventory_menagment(player):
+    inx=1
+    for item in player['Inventory']:
+        print(f"{inx}- {item['Name']}")
+        inx+=1
+    success=False
+    while not success:
+        user_input=util.key_pressed()
+        if user_input.isdigit():
+            if int(user_input)>len(player['Inventory']):
+                print("Out of range")
+            else:
+                util.use_item(player,player['Inventory'][int(user_input)-1])
+                player['Inventory'].pop(int(user_input)-1)
+                success=True
+        if user_input =='c':
+        
+            
+            success=True
+
 def experience_level_check(player):
     if player["Experience"] > player["Level"] * 500:
        player["Experience"] -= player["Level"] * 500
