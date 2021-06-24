@@ -5,9 +5,6 @@ import random
 
 def labrador_character():
     inventory = []
-
-    for i in range(15):
-        inventory.append(spawn_bone())
     return {"Name":"labrador","Symbol":"L", "HP": 100, "BaseDamage":15, "CriticalChance":20
     , "DodgeChance": 20,"Type":"Player", "Xpoz":1, "Ypoz":1
     , "Walkable":False, "MaxHP":100, "Armor":0, "Level": 1, "Experience" : 0, "Inventory":inventory,

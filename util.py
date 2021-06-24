@@ -63,6 +63,7 @@ def Attack_chances(attacker:dict,defender):
 def move_player(board, player):
     pressed_key = key_pressed()
     global Nail_flag
+    global Steps_count
     if pressed_key == "w":
         if player["Ypoz"] - 1 >= 0:
             if board[player["Ypoz"] - 1][player["Xpoz"]]["Walkable"]:
@@ -73,6 +74,7 @@ def move_player(board, player):
                 else:
                     board[player["Ypoz"]][player["Xpoz"]] = ObjectGenerator.spawn_floor()
                 player["Ypoz"] -= 1
+                Steps_count += 1
             elif board[player["Ypoz"] - 1][player["Xpoz"]]["Type"] == "Enemy":
                 Attack_chances(player, board[player["Ypoz"] - 1][player["Xpoz"]])
                 engine.CURRENT_ENEMY = board[player["Ypoz"] - 1][player["Xpoz"]]
@@ -92,6 +94,7 @@ def move_player(board, player):
                 else:
                     board[player["Ypoz"]][player["Xpoz"]] = ObjectGenerator.spawn_floor()
                 player["Ypoz"] += 1
+                Steps_count += 1
             elif board[player["Ypoz"] + 1][player["Xpoz"]]["Type"] == "Enemy":
                 Attack_chances(player,board[player["Ypoz"] + 1][player["Xpoz"]])
                 engine.CURRENT_ENEMY = board[player["Ypoz"] + 1][player["Xpoz"]]
@@ -111,6 +114,7 @@ def move_player(board, player):
                 else:
                     board[player["Ypoz"]][player["Xpoz"]] = ObjectGenerator.spawn_floor()
                 player["Xpoz"] += 1
+                Steps_count += 1
             elif board[player["Ypoz"]][player["Xpoz"] + 1]["Type"] == "Enemy":
                 Attack_chances(player,board[player["Ypoz"]][player["Xpoz"] + 1])
                 engine.CURRENT_ENEMY = board[player["Ypoz"]][player["Xpoz"] + 1]
@@ -130,6 +134,7 @@ def move_player(board, player):
                 else:
                     board[player["Ypoz"]][player["Xpoz"]] = ObjectGenerator.spawn_floor()
                 player["Xpoz"] -= 1
+                Steps_count += 1
             elif board[player["Ypoz"]][player["Xpoz"] - 1]["Type"] == "Enemy":
                 Attack_chances(player,board[player["Ypoz"]][player["Xpoz"] - 1])
                 engine.CURRENT_ENEMY = board[player["Ypoz"]][player["Xpoz"] - 1]
@@ -151,6 +156,7 @@ def move_player(board, player):
         return False  
     else:
         return False
+    
     return True
 
 def enemy_activity(board, list_of_enemies, player):
