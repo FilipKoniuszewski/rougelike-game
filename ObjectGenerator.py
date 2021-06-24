@@ -4,7 +4,7 @@ import random
 #characters
 
 def labrador_character():
-    inventory = [spawn_scooby_snack(), spawn_scooby_snack()]
+    inventory = [spawn_scooby_snack(), spawn_scooby_snack(), spawn_nail(), spawn_nail()]
     return {"Name":"labrador","Symbol":"L", "HP": 100, "BaseDamage":15, "CriticalChance":20
     , "DodgeChance": 60,"Type":"Player", "Xpoz":1, "Ypoz":1
     , "Walkable":False, "MaxHP":100, "Armor":0, "Level": 1, "Experience" : 0, "Inventory":inventory, "Atributes":1}
@@ -43,8 +43,14 @@ def spawn_rat(Xpoz, Ypoz):
 def spawn_cat(Xpoz, Ypoz):
     return {"Name":"cat", "Type":"Enemy", "Symbol":"C", "Xpoz":Xpoz
     , "Ypoz":Ypoz, "Walkable":False, "Inventory": package_of_items()
-    , "HP": 200, "Level": 2, "MaxHP":200, "BaseDamage":20, "CriticalChance":20
+    , "HP": 200, "Level": 2, "MaxHP":200, "BaseDamage":30, "CriticalChance":20
     , "DodgeChance": 0, "Armor":0, "XpReward": 300}
+
+def spawn_boar(Xpoz, Ypoz):
+    return {"Name":"Boar", "Type":"Enemy", "Symbol":"B", "Xpoz":Xpoz
+    , "Ypoz":Ypoz, "Walkable":False, "Inventory": package_of_items()
+    , "HP": 200, "Level": 2, "MaxHP":300, "BaseDamage":40, "CriticalChance":20
+    , "DodgeChance": 0, "Armor":0, "XpReward": 340}
 
 def package_of_items():
     package_of_items = [spawn_scooby_snack(),spawn_collar(),
@@ -52,21 +58,39 @@ def package_of_items():
     inventory = random.choices(package_of_items, weights = [1,1,1,1,1,1,1], k = 3)
     return inventory
 
+#map
+
 def spawn_floor():
     return {"Name":"Floor", "Type":"Map", "Symbol":" ", "Walkable":True}
 
 def spawn_wall_horizontal():
-    return {"Name":"Wall1", "Type":"Map", "Symbol":"▅", "Walkable":False}
+    return {"Name":"Wall1", "Type":"Map", "Symbol":"═", "Walkable":False}
 
 def spawn_wall_upright():
-    return {"Name":"Wall2", "Type":"Map", "Symbol":"▊", "Walkable":False}
+    return {"Name":"Wall2", "Type":"Map", "Symbol":"║", "Walkable":False}
 
 def spawn_corners():
-    return [{"Name":"corner1", "Type":"Map", "Symbol":"▇", "Walkable":False},
-    {"Name":"corner2", "Type":"Map", "Symbol":"▇", "Walkable":False},
-    {"Name":"corner3", "Type":"Map", "Symbol":"▇", "Walkable":False},
-    {"Name":"corner4", "Type":"Map", "Symbol":"▇", "Walkable":False}]
+    return [{"Name":"corner1", "Type":"Map", "Symbol":"╔", "Walkable":False},
+    {"Name":"corner2", "Type":"Map", "Symbol":"╗", "Walkable":False},
+    {"Name":"corner3", "Type":"Map", "Symbol":"╚", "Walkable":False},
+    {"Name":"corner4", "Type":"Map", "Symbol":"╝", "Walkable":False}]
+
+def spawn_house():
+    return [{"Name":"char0", "Type":"Map", "Symbol":"__", "Walkable":False},
+    {"Name":"char1", "Type":"Map", "Symbol":"/", "Walkable":False},
+    {"Name":"char2", "Type":"Map", "Symbol":"\\", "Walkable":False},
+    {"Name":"char3", "Type":"Map", "Symbol":"-", "Walkable":False},
+    {"Name":"char4", "Type":"Map", "Symbol":'"', "Walkable":False},
+    {"Name":"char5", "Type":"Map", "Symbol":'_', "Walkable":False},
+    {"Name":"char6", "Type":"Map", "Symbol":'|', "Walkable":False},
+    {"Name":"char7", "Type":"Map", "Symbol":'~', "Walkable":False},
+    {"Name":"char8", "Type":"Map", "Symbol":'^', "Walkable":False}]
+
+def tree():
+    return {"Name":"Floor", "Type":"Map", "Symbol":"Y", "Walkable":False}
 #items 
+def spawn_nail():
+    return {"Name":"Nail", "Type":"Map", "Symbol":"╳", "Walkable":False}
 
 def spawn_scooby_snack():
     return {"Name":"Scooby snack", "Type":"Consumable", "HpReward":20, "Duration": 1}
@@ -88,6 +112,8 @@ def spawn_banana_peel():
 
 def spawn_ball():
     return {"Name": "Ball", "Type": "Usable"}
+
+
 
 #Atributes
 
@@ -111,3 +137,18 @@ def spawn_dead_mouse():
 
 def spawn_boar_horn():
     return {"Name": "Boar horn"}
+
+Boss_hp = 500
+
+def spawn_tire(Ypoz, Xpoz):
+    return {"Name":"Dog catcher", "Symbol":"X", "Xpoz":Xpoz, "Ypoz":Ypoz, "Type":"Enemy", "HP":Boss_hp, "BaseDamage":30, "CriticalChance":15, "DodgeChance": 20
+    , "XpReward": 100, "Walkable":False}
+
+def spawn_hull(Ypoz, Xpoz):
+    return {"Name":"Dog catcher", "Symbol":"#", "Xpoz":Xpoz, "Ypoz":Ypoz, "Type":"Enemy", "HP":Boss_hp, "BaseDamage":30, "CriticalChance":15, "DodgeChance": 20
+    , "XpReward": 100, "Walkable":False}
+
+def spawn_roof(Ypoz, Xpoz):
+    return {"Name":"Dog catcher", "Symbol":"O", "Xpoz":Xpoz, "Ypoz":Ypoz, "Type":"Enemy", "HP":Boss_hp, "BaseDamage":30, "CriticalChance":15, "DodgeChance": 20
+    , "XpReward": 100, "Walkable":False}
+

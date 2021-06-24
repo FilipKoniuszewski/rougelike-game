@@ -25,6 +25,9 @@ def shuffle_effects(player):
     for effect in to_pop:
         util.EFFECTS.remove(effect)
 
+
+    
+
 def main():
     # player = create_player()
     # board = engine.create_board(BOARD_WIDTH, BOARD_HEIGHT)
@@ -47,7 +50,9 @@ def main():
     engine.put_player_on_board(board, player)
     # engine.put_player_on_board(board, ObjectGenerator.spawn_dogge(5,3))
     list_of_enemies = []
-    util.add_enemies(board, 3, list_of_enemies)
+    # util.add_enemies(board, 3, list_of_enemies)
+    boss_list = []
+    util.spawn_boss(board, 10, 10, boss_list)
     enemy_turn = False
     while player["HP"] > 0:
         util.clear_screen()
@@ -59,6 +64,8 @@ def main():
         shuffle_effects(player)
         util.remove_dead_mobs(player, board, list_of_enemies)
         ui.experience_level_check(player)
+        if util.Boss_stun > 0:
+            util.Boss_stun -= 1
         while not success:
             util.clear_screen()
             print(engine.display_statistics(player))
@@ -66,8 +73,12 @@ def main():
             ui.display_board(board)
             ui.print_log()
             success = util.move_player(board, player)
+            if success:
+                util.Steps_count += 1
         if enemy_turn:
             util.enemy_activity(board, list_of_enemies, player)
+            if util.Boss_stun <= 0:
+                util.move_boss(player, board, boss_list)
             if player["HP"] <= 0:
                 util.clear_screen()
                 print(engine.display_end_screen(player))
@@ -78,4 +89,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 

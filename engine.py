@@ -7,16 +7,6 @@ CURRENT_ENEMY = {}
 
 
 def create_board(width, height):
-    '''
-    Creates a new game board based on input parameters.
-
-    Args:
-    int: The width of the board
-    int: The height of the board
-
-    Returns:
-    list: Game board
-    '''
     board = []
     for i in range(width):
         board.append([])
@@ -33,9 +23,35 @@ def create_board(width, height):
     board[0][29] = corners[1]
     board[19][0] = corners[2]
     board[19][29] = corners[3]
-
-    
+    board = create_house(board,18)
     return board
+
+def create_house(board,place):
+    house = ObjectGenerator.spawn_house()
+    floor = False
+    for i in range(8):
+        if floor == False:
+            board[place][place+i] = house[7]
+            floor = True
+        else:
+            board[place][place+i] = house[8]
+            floor = False
+    board[place-1][19] = house[5]
+    board[place-1][20] = house[6]
+    board[place-1][21] = house[6]
+    board[place-1][22] = house[4]
+    board[place-1][23] = house[6]
+    board[place-1][24] = house[5]
+    board[place-2][20] = house[1]
+    board[place-2][21] = house[2]
+    board[place-2][22] = house[3]
+    board[place-2][23] = house[2]
+    board[place-3][21] = house[5]
+    board[place-3][22] = house[5]
+    return board
+
+
+
 
 def put_player_on_board(board, player):
     '''
@@ -93,9 +109,9 @@ Press [a] previous character\n""")
                 continue
         else:
             util.clear_screen()
-            print("Invalid type\n")
-            time.sleep(1)
-            util.clear_screen()
+            # print("Invalid type\n")
+            # time.sleep(1)
+            # util.clear_screen()
             continue
 
 def create_character_class_as_table(character_type):
@@ -138,7 +154,7 @@ def display_statistics(player):
         elif element == "Experience":
             spaces = 10 - len(str(player[element]))
             table += f"║{player[element]}{' '*spaces}║"
-    table += "\n╚══════════╩══════════╩══════════╩══════════╝"
+    table += f"\n╚{10*'═'}╩{10*'═'}╩{10*'═'}╩{10*'═'}╝"
     return table
 
 def display_current_enemy():
@@ -164,12 +180,12 @@ def display_current_enemy():
             elif element == "XpReward":
                 spaces = 10 - len(str(CURRENT_ENEMY[element]))
                 table += f"║{CURRENT_ENEMY[element]}{' '*spaces}║"
-        table += "\n╚══════════╩══════════╩══════════╩══════════╝"
+        table += f"\n╚{10*'═'}╩{10*'═'}╩{10*'═'}╩{10*'═'}╝"
     return table
     
 
 def display_end_screen(player):
-    counters = [util.KILL_COUNT,util.STEPS_COUNT,util.CRITICAL_HITS]
+    counters = [util.Kill_count,util.Steps_count,util.Critical_hits]
     table = ""
     table += "YOU LOST THE GAME\nSTATISTICS\n"
     table += "╔══════════╦══════════╗\n"
@@ -188,16 +204,16 @@ def display_end_screen(player):
             table += f"╠{10*'═'}╬{10*'═'}╣\n"
     for info in range(len(counters)):
         if info == 0:
-            spaces = 10 - len(str(util.KILL_COUNT))
-            table += f"║Kills{5*' '}║{util.KILL_COUNT}{' '*spaces}║\n"
+            spaces = 10 - len(str(util.Kill_count))
+            table += f"║Kills{5*' '}║{util.Kill_count}{' '*spaces}║\n"
             table += f"╠{10*'═'}╬{10*'═'}╣\n"
         elif info == 1:
-            spaces = 10 - len(str(util.STEPS_COUNT))
-            table += f"║Steps{5*' '}║{util.STEPS_COUNT}{' '*spaces}║\n"
+            spaces = 10 - len(str(util.Steps_count))
+            table += f"║Steps{5*' '}║{util.Steps_count}{' '*spaces}║\n"
             table += f"╠{10*'═'}╬{10*'═'}╣\n"
         else:
-            spaces = 10 - len(str(util.CRITICAL_HITS))
-            table += f"║Criticals{1*' '}║{util.CRITICAL_HITS}{' '*spaces}║\n"
+            spaces = 10 - len(str(util.Critical_hits))
+            table += f"║Criticals{1*' '}║{util.Critical_hits}{' '*spaces}║\n"
     table += "╚══════════╩══════════╝"
     return table
 
