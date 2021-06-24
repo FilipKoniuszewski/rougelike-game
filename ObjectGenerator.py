@@ -4,7 +4,7 @@ import random
 #characters
 
 def labrador_character():
-    inventory = [spawn_scooby_snack(), spawn_scooby_snack()]
+    inventory = []
     return {"Name":"labrador","Symbol":"L", "HP": 100, "BaseDamage":15, "CriticalChance":20
     , "DodgeChance": 20,"Type":"Player", "Xpoz":1, "Ypoz":1
     , "Walkable":False, "MaxHP":100, "Armor":0, "Level": 1, "Experience" : 0, "Inventory":inventory,
@@ -39,8 +39,11 @@ def spawn_dogge(Xpoz, Ypoz):
     , "DodgeChance": 0, "Armor":0, "XpReward": 300}
 
 def spawn_rat(Xpoz, Ypoz):
+    inventory = []
+    for i in range(random.randint(0,1)):
+        inventory.append(random.choice([spawn_scooby_snack(), spawn_bone()]))
     return {"Name":"rat", "Type":"Enemy", "Symbol":"R", "Xpoz":Xpoz
-    , "Ypoz":Ypoz, "Walkable":False, "Inventory": package_of_items()
+    , "Ypoz":Ypoz, "Walkable":False, "Inventory": inventory
     , "HP": 100, "Level": 1, "MaxHP":100, "BaseDamage":20, "CriticalChance":10
     , "DodgeChance": 0, "Armor":0, "XpReward": 300}
 
@@ -50,13 +53,13 @@ def spawn_cat(Xpoz, Ypoz):
         inventory.append(random.choice([spawn_scooby_snack(), spawn_scooby_snack(), spawn_coffee_bean(), spawn_cat_food(), spawn_cat_food()]))
     return {"Name":"Stray cat", "Type":"Enemy", "Symbol":"C", "Xpoz":Xpoz
     , "Ypoz":Ypoz, "Walkable":False, "Inventory": inventory
-    , "HP": 10, "Level": 2, "MaxHP":200, "BaseDamage":15, "CriticalChance":20
+    , "HP": 70, "Level": 2, "MaxHP":200, "BaseDamage":15, "CriticalChance":20
     , "DodgeChance": 40, "Armor":0, "XpReward": 300}
 
 def spawn_boar(Xpoz, Ypoz):
     inventory = []
-    for i in range(random.randint(1,2)):
-        inventory.append(random.choice([spawn_scooby_snack(), spawn_scooby_snack(), spawn_coffee_bean(), spawn_cat_food(), spawn_cat_food()]))
+    for i in range(random.randint(2,3)):
+        inventory.append(random.choice([spawn_coffee_bean(), spawn_dog_food(), spawn_bone()]))
     return {"Name":"Angry Boar", "Type":"Enemy", "Symbol":"B", "Xpoz":Xpoz
     , "Ypoz":Ypoz, "Walkable":False, "Inventory": inventory
     , "HP": 300, "Level": 5, "MaxHP":300, "BaseDamage":40, "CriticalChance":10
@@ -70,12 +73,6 @@ def spawn_boar(Xpoz, Ypoz):
     , "Ypoz":Ypoz, "Walkable":False, "Inventory": inventory
     , "HP": 200, "Level": 2, "MaxHP":300, "BaseDamage":40, "CriticalChance":20
     , "DodgeChance": 0, "Armor":0, "XpReward": 340}
-
-def package_of_items():
-    package_of_items = [spawn_scooby_snack(),spawn_collar(),
-    spawn_dog_food(),spawn_bone(),spawn_stick(),spawn_ball()]
-    inventory = random.choices(package_of_items, weights = [1,1,1,1,1,1,1], k = 3)
-    return inventory
 
 #map
 
@@ -126,9 +123,6 @@ def spawn_nail():
 def spawn_scooby_snack():
     return {"Name":"Scooby snack", "Type":"Consumable", "HpReward":20, "Duration": 1}
 
-def spawn_collar():
-    return {"Name": "Collar", "Type": "Cloth", "ArmorReward": 50, "Duration": 1}
-
 def spawn_dog_food():
     return {"Name": "Dog food", "Type": "Consumable", "HpReward": 50,}
 
@@ -136,16 +130,14 @@ def spawn_cat_food():
     return {"Name": "Cat food", "Type": "Consumable", "HpReward": 30,}
 
 def spawn_bone():
-    return {"Name": "Bone", "Type": "Usable", "BaseDamageReward": 20, "DodgeChanceReward": -10, "Duration": 5}
+    return {"Name": "Bone", "Type": "Usable", "HpReward":10, "CriticalChanceReward": 5, "Duration": 10}
 
 def spawn_stick():
-    return {"Name": "Stick", "Type": "Usable", "CriticalChanceReward": 20, "Duration": 10}
+    return {"Name": "Stick", "Type": "Usable", "CriticalChanceReward": 10, "Duration": 10}
 
 def spawn_coffee_bean():
     return {"Name": "Coffee bean", "Type": "Usable", "DodgeChanceReward": 10, "Duration": 15} #tu chciałam żeby całkowicie znikała możliwość uniku
 
-def spawn_ball():
-    return {"Name": "Ball", "Type": "Usable"}
 
 
 
