@@ -76,6 +76,7 @@ def game_loop():
     dialogue.dialogue_with_Benek(player) # poprawić imię 
     list_of_enemies = []
     board = MapCreator.create_1st_map(list_of_enemies)
+    board[1][1] = player
     success = play_map(player, board, list_of_enemies)
     if success:
         dialogue.second_dialogue_with_Benek(player)

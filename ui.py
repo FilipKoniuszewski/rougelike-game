@@ -52,7 +52,7 @@ def display_stats(player):
     table += "STATISTICS\n"
     table += f"""┌{20*'─'}┐\n"""
     for stat in player:
-        if not stat in ["Symbol", "Type", "Xpoz", "Ypoz", "Walkable", "Inventory", "Atributes"]:
+        if not stat in ["Symbol", "Type", "Xpoz", "Ypoz", "Walkable", "Inventory", "Atributes", "Progress"]:
             for effect in util.EFFECTS:
                 if effect[0] == stat:
                     additional += effect[2]
@@ -156,7 +156,9 @@ def display_atribute_to_distribute(enchant):
     table += f"└{41*'─'}┘\n"
     return table
 
+
 def inventory_menagment(player):
+    player["Inventory"] = sorted(player["Inventory"], key=lambda k: k['Name']) 
     inx=1
     print("""
     ╔═════════╗	
