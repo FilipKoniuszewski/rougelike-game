@@ -6,7 +6,7 @@ import ui
 CURRENT_ENEMY = {}
 
 
-def create_board(width, height):
+def create_board(width, height, hause=False):
     board = []
     for i in range(width):
         board.append([])
@@ -23,7 +23,8 @@ def create_board(width, height):
     board[0][29] = corners[1]
     board[19][0] = corners[2]
     board[19][29] = corners[3]
-    board = create_house(board,18)
+    if hause:
+        board = create_house(board,18)
     return board
 
 def create_house(board,place):
@@ -83,7 +84,7 @@ def create_player():
 Press [e] choose this character
 Press [d] next character
 Press [a] previous character\n""")
-        user_input = util.key_pressed()
+        user_input = util.key_pressed().lower()
         if user_input == 'e':
             player_input = input("Put name of your character: ")
             character_type["Name"] = player_input

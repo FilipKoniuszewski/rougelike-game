@@ -63,6 +63,7 @@ def Attack_chances(attacker:dict,defender):
 def move_player(board, player):
     pressed_key = key_pressed()
     global Nail_flag
+    global Steps_count
     if pressed_key == "w":
         if player["Ypoz"] - 1 >= 0:
             if board[player["Ypoz"] - 1][player["Xpoz"]]["Walkable"]:
@@ -73,6 +74,7 @@ def move_player(board, player):
                 else:
                     board[player["Ypoz"]][player["Xpoz"]] = ObjectGenerator.spawn_floor()
                 player["Ypoz"] -= 1
+                Steps_count += 1
             elif board[player["Ypoz"] - 1][player["Xpoz"]]["Type"] == "Enemy":
                 Attack_chances(player, board[player["Ypoz"] - 1][player["Xpoz"]])
                 engine.CURRENT_ENEMY = board[player["Ypoz"] - 1][player["Xpoz"]]
@@ -92,6 +94,7 @@ def move_player(board, player):
                 else:
                     board[player["Ypoz"]][player["Xpoz"]] = ObjectGenerator.spawn_floor()
                 player["Ypoz"] += 1
+                Steps_count += 1
             elif board[player["Ypoz"] + 1][player["Xpoz"]]["Type"] == "Enemy":
                 Attack_chances(player,board[player["Ypoz"] + 1][player["Xpoz"]])
                 engine.CURRENT_ENEMY = board[player["Ypoz"] + 1][player["Xpoz"]]
@@ -111,6 +114,7 @@ def move_player(board, player):
                 else:
                     board[player["Ypoz"]][player["Xpoz"]] = ObjectGenerator.spawn_floor()
                 player["Xpoz"] += 1
+                Steps_count += 1
             elif board[player["Ypoz"]][player["Xpoz"] + 1]["Type"] == "Enemy":
                 Attack_chances(player,board[player["Ypoz"]][player["Xpoz"] + 1])
                 engine.CURRENT_ENEMY = board[player["Ypoz"]][player["Xpoz"] + 1]
@@ -130,6 +134,7 @@ def move_player(board, player):
                 else:
                     board[player["Ypoz"]][player["Xpoz"]] = ObjectGenerator.spawn_floor()
                 player["Xpoz"] -= 1
+                Steps_count += 1
             elif board[player["Ypoz"]][player["Xpoz"] - 1]["Type"] == "Enemy":
                 Attack_chances(player,board[player["Ypoz"]][player["Xpoz"] - 1])
                 engine.CURRENT_ENEMY = board[player["Ypoz"]][player["Xpoz"] - 1]
@@ -151,6 +156,7 @@ def move_player(board, player):
         return False  
     else:
         return False
+    
     return True
 
 def enemy_activity(board, list_of_enemies, player):
@@ -231,25 +237,29 @@ def use_item(player, item):
         player["HP"] += item["HpReward"]
         if player["HP"] > player["MaxHP"]:
             player["HP"] = player["MaxHP"]
-    elif "CriticalChanceReward" in item:
+        ui.Information_board(f"{player['Name']} has healed {item['HpReward']} points.")
+    if "CriticalChanceReward" in item:
         player["CriticalChance"] += item["CriticalChanceReward"]
         # if player["CriticalChanceReward"] > 100:
         #     player["CriticalChanceReward"] = 100
         EFFECTS.append(["CriticalChance", item["Duration"], item["CriticalChanceReward"]])
-    elif "DodgeChanceReward" in item:
+        ui.Information_board(f"{player['Name']} critical chance increased by {item['CriticalChanceReward']} points for {item['Duration']} turns.")
+    if "DodgeChanceReward" in item:
         player["DodgeChance"] += item["DodgeChanceReward"]
         # if player["DodgeChanceReward"] > 100:
         #     player["DodgeChanceReward"] = 100
         EFFECTS.append(["DodgeChance", item["Duration"], item["DodgeChanceReward"]])
-    elif "ArmorReward" in item:
+        ui.Information_board(f"{player['Name']} dodge chance increased by {item['DodgeChanceReward']} points for {item['Duration']} turns.")
+    if "ArmorReward" in item:
         player["Armor"] += item["ArmorReward"]
         if player["DodgeChanceReward"] > 100:
             player["DodgeChanceReward"] = 100
         EFFECTS.append("ArmorChance", item["Duration"]), item["ArmorChanceReward"]
-    elif "BaseDamageReward" in item:
+    if "BaseDamageReward" in item:
         player["BaseDamage"] += item["BaseDamageReward"]
-        EFFECTS.append(["BaseDamage", item["Duration"], item["BaseDamageReward"]])    
-    elif item["Name"] == "Nail":
+        EFFECTS.append(["BaseDamage", item["Duration"], item["BaseDamageReward"]])  
+        ui.Information_board(f"{player['Name']} base damage increased by {item['BaseDamageReward']} points for {item['Duration']} turns.")  
+    if item["Name"] == "Nail":
         Nail_flag = True
 
     

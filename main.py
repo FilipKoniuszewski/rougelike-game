@@ -24,69 +24,10 @@ def shuffle_effects(player):
         if effect[1] == 0:
             player[effect[0]] -= effect[2]
             to_pop.append(effect)
+            ui.Information_board(f"{effect[0]} bonus is over.")
     for effect in to_pop:
         util.EFFECTS.remove(effect)
 
-
-    
-
-def main():
-    # player = create_player()
-    # board = engine.create_board(BOARD_WIDTH, BOARD_HEIGHT)
-
-    # util.clear_screen()
-    # is_running = True
-    # while is_running:
-    #     engine.put_player_on_board(board, player)
-    #     ui.display_board(board)
-
-    #     key = util.key_pressed()
-    #     if key == 'q':
-    #         is_running = False
-    #     else:
-    #         pass
-    #     util.clear_screen()
-
-    board = engine.create_board(20,30)
-    player = engine.create_player()
-    engine.put_player_on_board(board, player)
-    # engine.put_player_on_board(board, ObjectGenerator.spawn_dogge(5,3))
-    list_of_enemies = []
-    # util.add_enemies(board, 3, list_of_enemies)
-    boss_list = []
-    util.spawn_boss(board, 10, 10, boss_list)
-    enemy_turn = False
-    while player["HP"] > 0:
-        util.clear_screen()
-        print(engine.display_statistics(player))
-        print(engine.display_current_enemy())
-        ui.display_board(board)
-        ui.print_log()
-        success = False
-        shuffle_effects(player)
-        util.remove_dead_mobs(player, board, list_of_enemies)
-        ui.experience_level_check(player)
-        if util.Boss_stun > 0:
-            util.Boss_stun -= 1
-        while not success:
-            util.clear_screen()
-            print(engine.display_statistics(player))
-            print(engine.display_current_enemy())
-            ui.display_board(board)
-            ui.print_log()
-            success = util.move_player(board, player)
-            if success:
-                util.Steps_count += 1
-        if enemy_turn:
-            util.enemy_activity(board, list_of_enemies, player)
-            if util.Boss_stun <= 0:
-                util.move_boss(player, board, boss_list)
-            if player["HP"] <= 0:
-                util.clear_screen()
-                print(engine.display_end_screen(player))
-            enemy_turn = False
-        else:
-            enemy_turn = True
 
 def play_map(player, board, list_of_enemies):
     enemy_turn = False
@@ -115,29 +56,34 @@ def play_map(player, board, list_of_enemies):
             util.enemy_activity(board, list_of_enemies, player)
             if player["HP"] <= 0:
                 return False
-                util.clear_screen()
-                print(engine.display_end_screen(player))
             enemy_turn = False
         else:
             enemy_turn = True
 
+def update_boss_hp(boss_list):
+    min = 500
+    for part in boss_list:
+        if part["HP"] < min:
+            min = part["HP"]
+    for part in boss_list:
+        part["HP"] = min
+            
+
+
 
 def game_loop():
     player = engine.create_player()
-    dialogue.dialogue_with_Benek() # poprawić imię 
-
-    board = engine.create_board(20,30)
-    board[18][28] = ObjectGenerator.spawn_exit()
+    dialogue.dialogue_with_Benek(player) # poprawić imię 
     list_of_enemies = []
-    util.add_enemies(board, 1, list_of_enemies)
-
+    board = MapCreator.create_1st_map(list_of_enemies)
+    board[1][1] = player
     success = play_map(player, board, list_of_enemies)
     if success:
-        dialogue.second_dialogue_with_Benek()
+        dialogue.second_dialogue_with_Benek(player)
         dialogue.waiting_screen(dialogue.frames_2)
-        dialogue.third_dialogue_with_Benek()
+        dialogue.third_dialogue_with_Benek(player)
         dialogue.waiting_screen(dialogue.frames)
-        dialogue.dialogue_with_cat()
+        dialogue.dialogue_with_cat(player)
         player["Inventory"].append(ObjectGenerator.spawn_dog_food())
         player["Progress"] = False
         list_of_enemies = []
@@ -147,9 +93,9 @@ def game_loop():
         player["Ypoz"] = 1
         success = play_map(player, board, list_of_enemies)
         if success:
-            dialogue.second_dialogue_with_cat()
+            dialogue.second_dialogue_with_cat(player)
             dialogue.waiting_screen(dialogue.cat_frames)
-            dialogue.dialogue_with_boar()
+            dialogue.dialogue_with_boar(player)
             player["Progress"] = False
             board = MapCreator.create_3nd_map(list_of_enemies)
             board[1][1] = player
@@ -191,6 +137,7 @@ def game_loop():
                         ui.display_board(board)
                         ui.print_log()
                         success = util.move_player(board, player)
+                    update_boss_hp(boss_list)
                     if enemy_turn:
                         if util.Boss_stun <= 0:
                             util.move_boss(player, board, boss_list)
@@ -214,7 +161,10 @@ def game_loop():
 
 
 if __name__ == '__main__':
-    game_loop()
-    # main()
+    user_input = "y"
+    while user_input.lower() == "y":
+        util.clear_screen()
+        game_loop()
+        user_input = input("Do you want to play again? (y/n)")
 
 

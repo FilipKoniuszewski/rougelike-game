@@ -52,7 +52,7 @@ def display_stats(player):
     table += "STATISTICS\n"
     table += f"""┌{20*'─'}┐\n"""
     for stat in player:
-        if not stat in ["Symbol", "Type", "Xpoz", "Ypoz", "Walkable", "Inventory", "Atributes"]:
+        if not stat in ["Symbol", "Type", "Xpoz", "Ypoz", "Walkable", "Inventory", "Atributes", "Progress"]:
             for effect in util.EFFECTS:
                 if effect[0] == stat:
                     additional += effect[2]
@@ -156,21 +156,24 @@ def display_atribute_to_distribute(enchant):
     table += f"└{41*'─'}┘\n"
     return table
 
+
 def inventory_menagment(player):
+    player["Inventory"] = sorted(player["Inventory"], key=lambda k: k['Name']) 
     inx=1
     print("""
     ╔═════════╗	
     ║INVENTORY║
     ╚═════════╝ """)
-    print(f"┌{18*'─'}┐")
+    print(f"┌{20*'─'}┐")
     for item in player['Inventory']:
         spaces = 16 - len(item["Name"])
+        spaces1 = 3 - len(str(inx))
         if inx != 1:
-            print(f"├{18*'─'}┤")
-        print(f"│{inx}│{item['Name']}{spaces*' '}│")
+            print(f"├{20*'─'}┤")
+        print(f"│{inx}{' '*spaces1}│{item['Name']}{spaces*' '}│")
         inx+=1
     success=False
-    print(f"└{18*'─'}┘")
+    print(f"└{20*'─'}┘")
     print("""
 Press [number] to use item
 Press [something else] to leave inventory""")
@@ -194,7 +197,7 @@ def experience_level_check(player):
        player["Level"]+=1
        player["HP"] = player["MaxHP"]
        player["Atributes"]+=2
-       Information_board(f"You entered level{player['Level']}")
+       Information_board(f"***You reached level {player['Level']}!***")
     
         
     
