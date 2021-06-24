@@ -131,7 +131,7 @@ def waiting_screen(frames):
       range += 1
 
 
-def dialogue_with_Benek():
+def dialogue_with_Benek(player):
     print('''
          ,--._______,-.
        ,','  ,    .  ,_`-.
@@ -161,19 +161,19 @@ def dialogue_with_Benek():
     print('''Benek: Woof woof! 
 Benek: What are you doing here?\n''')
     key_pressed()
-    print("You: Hi! I'm Dogge, I lost my human. Did you see him?\n")
+    print(f"{player['Name']}: Hi! I'm {player['Name']}, I lost my human. Did you see him?\n")
     key_pressed()
     print("Benek: I don't know. There are lot of humans. How does your looks?\n")
     key_pressed()
-    print('You: My human... He smell like sausage and taste like ham. Did you see him?\n')
+    print(f"{player['Name']}: My human... He smell like sausage and taste like ham. Did you see him?\n")
     key_pressed()
     print("Benek: ... Yes, I did. I can show you which way he went. But first, you have to help me.\n")
     key_pressed()
-    print("You: Can you first show me and then I will help you?\n")
+    print(f"{player['Name']}: Can you first show me and then I will help you?\n")
     key_pressed()
     print("Benek: No.\n")
     key_pressed()
-    print("You: Ok, so... How can I help you?\n")
+    print(f"{player['Name']}: Ok, so... How can I help you?\n")
     key_pressed()
     print('''
           __,-----._                       ,-.
@@ -200,11 +200,11 @@ Benek: What are you doing here?\n''')
                     BENEK\n''')
     print("Benek: I saw few mouses over there. They are stealing my food. We need to hunt them. Can you do that?\n")
     key_pressed()
-    print("You: Of course I can! Show me where are they!\n")
+    print(f"{player['Name']}: Of course I can! Show me where are they!\n")
     key_pressed()
     util.clear_screen()
 
-def second_dialogue_with_Benek():
+def second_dialogue_with_Benek(player):
     util.clear_screen()
     print('''
          ,--._______,-.
@@ -233,19 +233,19 @@ def second_dialogue_with_Benek():
 ''')
     print("Benek: Thank you my friend! You beat them! Do you want to stay in my hideout?\n")
     key_pressed()
-    print("You: I don't know. I should probably look for my human now.\n")
+    print(f"{player['Name']}: I don't know. I should probably look for my human now.\n")
     key_pressed()
     print("Benek: You're not going to find anything in the night. You better stay with me and in the morning I can show you which way he went.\n")
     key_pressed()
-    print("You: Ok then. Let's go.\n")
+    print(f"{player['Name']}: Ok then. Let's go.\n")
     key_pressed()
     util.clear_screen()
 
-def third_dialogue_with_Benek():
+def third_dialogue_with_Benek(player):
   util.clear_screen()
   print("Benek: Here you go, you probably want to take some food on the road\n")
   key_pressed()
-  print("You: Thank you! Do you think I'm gonna find my human?\n")
+  print(f"{player['Name']}: Thank you! Do you think I'm gonna find my human?\n")
   key_pressed()
   print("Benek: Of course you are!\n")
   key_pressed()
@@ -260,17 +260,17 @@ def third_dialogue_with_Benek():
   key_pressed
   print("Benek: Take this too.\n")
   key_pressed()
-  print("You: Ewww! What's that? It smells so bad..\n")
+  print(f"{player['Name']}: Ewww! What's that? It smells so bad..\n")
   key_pressed()
   print("Benek: I don't know. It works on cats. Meybe you're going to need this.\n")
   key_pressed()
-  print("You: Thank you. Be well my friend\n!")
+  print(f"{player['Name']}: Thank you. Be well my friend\n!")
   key_pressed()
   util.clear_screen()
 
-def dialogue_with_cat():
+def dialogue_with_cat(player):
   util.clear_screen()
-  print("You: Oh my Dog! You scared me!\n")
+  print(f"{player['Name']}: Oh my Dog! You scared me!\n")
   key_pressed()
   print('''
 
@@ -286,19 +286,19 @@ def dialogue_with_cat():
 ''')
   print("Stripe: Is it a collar?\n")
   key_pressed()
-  print("You: Yes, why?\n")
+  print(f"{player['Name']}: Yes, why?\n")
   key_pressed()
   print("Stripe: Why are you wearing it? Do you have home?\n")
   key_pressed()
-  print("You: I lost my human. Did you see him?\n")
+  print(f"{player['Name']}: I lost my human. Did you see him?\n")
   key_pressed()
   print("Stripe: So you don't have home... give me that collar little dog.\n")
   key_pressed()
-  print("You: I don't want to...\n")
+  print(f"{player['Name']}: I don't want to...\n")
   key_pressed()
   print("Stripe: You will regret it MEOOOOOOW!!!\n")
 
-def second_dialogue_with_cat():
+def second_dialogue_with_cat(player):
   util.clear_screen()
   print('''
          .--._ 
@@ -329,12 +329,12 @@ def second_dialogue_with_cat():
                 STRIPE
     ''')
   key_pressed()
-  print("You: I'm.. gonna... go...\n")
+  print(f"{player['Name']}: I'm.. gonna... go...\n")
   key_pressed()
   util.clear_screen
 
 
-def dialogue_with_boar():
+def dialogue_with_boar(player):
   print('''
   
               _,-""""-..__
@@ -352,7 +352,7 @@ def dialogue_with_boar():
 ''')
   print("Mr Boar: Oink oink!\n")
   key_pressed()
-  print("You: *sneaking*\n")
+  print(f"{player['Name']}: *sneaking*\n")
   key_pressed()
   print("Mr Boar: YOU! I'M GONNA RAM YOU!!!!!!!\n")
   key_pressed()
@@ -361,14 +361,14 @@ def dialogue_with_boar():
 
 
 
-if __name__ == "__main__":
-  dialogue_with_Benek()
-  second_dialogue_with_Benek()
-  waiting_screen(frames)
-  third_dialogue_with_Benek()
-  waiting_screen(frames_2)
-  dialogue_with_cat()
-  key_pressed()
-  second_dialogue_with_cat()
-  waiting_screen(cat_frames)
-  dialogue_with_boar()
+# if __name__ == "__main__":
+#   dialogue_with_Benek()
+#   second_dialogue_with_Benek()
+#   waiting_screen(frames)
+#   third_dialogue_with_Benek()
+#   waiting_screen(frames_2)
+#   dialogue_with_cat()
+#   key_pressed()
+#   second_dialogue_with_cat()
+#   waiting_screen(cat_frames)
+#   dialogue_with_boar()

@@ -5,6 +5,9 @@ import random
 
 def labrador_character():
     inventory = []
+
+    for i in range(15):
+        inventory.append(spawn_bone())
     return {"Name":"labrador","Symbol":"L", "HP": 100, "BaseDamage":15, "CriticalChance":20
     , "DodgeChance": 20,"Type":"Player", "Xpoz":1, "Ypoz":1
     , "Walkable":False, "MaxHP":100, "Armor":0, "Level": 1, "Experience" : 0, "Inventory":inventory,
@@ -44,7 +47,7 @@ def spawn_rat(Xpoz, Ypoz):
         inventory.append(random.choice([spawn_scooby_snack(), spawn_bone()]))
     return {"Name":"rat", "Type":"Enemy", "Symbol":"R", "Xpoz":Xpoz
     , "Ypoz":Ypoz, "Walkable":False, "Inventory": inventory
-    , "HP": 100, "Level": 1, "MaxHP":100, "BaseDamage":20, "CriticalChance":10
+    , "HP": 50, "Level": 1, "MaxHP":50, "BaseDamage":15, "CriticalChance":10
     , "DodgeChance": 0, "Armor":0, "XpReward": 300}
 
 def spawn_cat(Xpoz, Ypoz):
@@ -54,7 +57,7 @@ def spawn_cat(Xpoz, Ypoz):
     return {"Name":"Stray cat", "Type":"Enemy", "Symbol":"C", "Xpoz":Xpoz
     , "Ypoz":Ypoz, "Walkable":False, "Inventory": inventory
     , "HP": 70, "Level": 2, "MaxHP":200, "BaseDamage":15, "CriticalChance":20
-    , "DodgeChance": 40, "Armor":0, "XpReward": 300}
+    , "DodgeChance": 40, "Armor":0, "XpReward": 450}
 
 def spawn_boar(Xpoz, Ypoz):
     inventory = []
