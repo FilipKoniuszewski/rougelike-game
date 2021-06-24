@@ -122,16 +122,16 @@ def play_map(player, board, list_of_enemies):
 
 def game_loop():
     player = engine.create_player()
-    dialogue.dialogue_with_Benek() # poprawić imię 
+    dialogue.dialogue_with_Benek(player) # poprawić imię 
     list_of_enemies = []
     board = MapCreator.create_1st_map(list_of_enemies)
     success = play_map(player, board, list_of_enemies)
     if success:
-        dialogue.second_dialogue_with_Benek()
+        dialogue.second_dialogue_with_Benek(player)
         dialogue.waiting_screen(dialogue.frames_2)
-        dialogue.third_dialogue_with_Benek()
+        dialogue.third_dialogue_with_Benek(player)
         dialogue.waiting_screen(dialogue.frames)
-        dialogue.dialogue_with_cat()
+        dialogue.dialogue_with_cat(player)
         player["Inventory"].append(ObjectGenerator.spawn_dog_food())
         player["Progress"] = False
         list_of_enemies = []
@@ -141,9 +141,9 @@ def game_loop():
         player["Ypoz"] = 1
         success = play_map(player, board, list_of_enemies)
         if success:
-            dialogue.second_dialogue_with_cat()
+            dialogue.second_dialogue_with_cat(player)
             dialogue.waiting_screen(dialogue.cat_frames)
-            dialogue.dialogue_with_boar()
+            dialogue.dialogue_with_boar(player)
             player["Progress"] = False
             board = MapCreator.create_3nd_map(list_of_enemies)
             board[1][1] = player

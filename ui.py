@@ -167,7 +167,10 @@ def inventory_menagment(player):
         spaces = 18 - len(item["Name"])
         if inx != 1:
             print(f"├{20*'─'}┤")
-        print(f"│{inx}│{item['Name']}{spaces*' '}│")
+        if inx > 9:
+            print(f"│{inx}│{item['Name']}{(spaces - 1)*' '}│")
+        else:
+            print(f"│{inx}│{item['Name']}{spaces*' '}│")
         inx+=1
     success=False
     print(f"└{20*'─'}┘")
