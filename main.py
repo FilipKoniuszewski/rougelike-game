@@ -75,6 +75,8 @@ def main():
             ui.display_board(board)
             ui.print_log()
             success = util.move_player(board, player)
+            if success:
+                util.Steps_count += 1
         if enemy_turn:
             util.enemy_activity(board, list_of_enemies, player)
             if util.Boss_stun <= 0:
@@ -125,7 +127,7 @@ def game_loop():
     dialogue.dialogue_with_Benek() # poprawić imię 
 
     board = engine.create_board(20,30)
-    board[5][5] = ObjectGenerator.spawn_exit()
+    board[18][28] = ObjectGenerator.spawn_exit()
     list_of_enemies = []
     util.add_enemies(board, 1, list_of_enemies)
 
@@ -208,6 +210,7 @@ def game_loop():
     else:
         util.clear_screen()
         print(engine.display_end_screen(player))
+
 
 
 if __name__ == '__main__':

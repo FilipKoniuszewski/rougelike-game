@@ -5,9 +5,9 @@ import ui
 import ObjectGenerator
 import engine
 EFFECTS = []
-KILL_COUNT = 0
-STEPS_COUNT = 0
-CRITICAL_HITS = 0
+Kill_count = 0
+Steps_count = 0
+Critical_hits = 0
 Nail_flag = False
 Boss_stun = 0
 
@@ -51,8 +51,8 @@ def Attack_chances(attacker:dict,defender):
         ui.Information_board(f"{defender['Name']} dodged {attacker['Name']} attack")        
     else:
         if tab_poss[1] <= attacker["CriticalChance"]:
-            global CRITICAL_HITS
-            CRITICAL_HITS += 1
+            global Critical_hits
+            Critical_hits += 1
             ui.Information_board(f"{attacker['Name']} dealt critical damage: {attacker['BaseDamage']*2} to {defender['Name']}")
             defender["HP"] -= (attacker["BaseDamage"]*2)  
         else:
@@ -151,9 +151,6 @@ def move_player(board, player):
         return False  
     else:
         return False
-
-    global STEPS_COUNT
-    STEPS_COUNT += 1
     return True
 
 def enemy_activity(board, list_of_enemies, player):
@@ -205,8 +202,8 @@ def remove_dead_mobs(player, board, list_of_enemies):
     for mob in list_of_enemies:
         if mob["HP"] <= 0:
             ui.Information_board(f"{player['Name']} has defeated {mob['Name']}")
-            global KILL_COUNT
-            KILL_COUNT += 1
+            global Kill_count
+            Kill_count += 1
             for item in mob["Inventory"]:
                 player["Inventory"].append(item)
             player["Experience"] += mob["XpReward"]

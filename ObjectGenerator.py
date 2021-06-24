@@ -62,14 +62,22 @@ def spawn_boar(Xpoz, Ypoz):
     , "HP": 300, "Level": 5, "MaxHP":300, "BaseDamage":40, "CriticalChance":10
     , "DodgeChance": 20, "Armor":0, "XpReward": 1500}
 
+def spawn_boar(Xpoz, Ypoz):
+    inventory = []
+    for i in range(random.randint(1,2)):
+        inventory.append(random.choice([spawn_scooby_snack(), spawn_scooby_snack(), spawn_coffee_bean(), spawn_cat_food(), spawn_cat_food()]))
+    return {"Name":"Boar", "Type":"Enemy", "Symbol":"B", "Xpoz":Xpoz
+    , "Ypoz":Ypoz, "Walkable":False, "Inventory": inventory
+    , "HP": 200, "Level": 2, "MaxHP":300, "BaseDamage":40, "CriticalChance":20
+    , "DodgeChance": 0, "Armor":0, "XpReward": 340}
+
 def package_of_items():
     package_of_items = [spawn_scooby_snack(),spawn_collar(),
     spawn_dog_food(),spawn_bone(),spawn_stick(),spawn_ball()]
     inventory = random.choices(package_of_items, weights = [1,1,1,1,1,1,1], k = 3)
     return inventory
 
-def spawn_floor():
-    return {"Name":"Floor", "Type":"Map", "Symbol":".", "Walkable":True}
+#map
 
 def spawn_exit():
     return {"Name":"Exit", "Type":"Map", "Symbol":"E", "Walkable":False}
@@ -83,7 +91,37 @@ def spawn_tree():
 
 def spawn_nail():
     return {"Name":"Nail", "Type":"Map", "Symbol":"X", "Walkable":False}
+def spawn_floor():
+    return {"Name":"Floor", "Type":"Map", "Symbol":" ", "Walkable":True}
+
+def spawn_wall_horizontal():
+    return {"Name":"Wall1", "Type":"Map", "Symbol":"═", "Walkable":False}
+
+def spawn_wall_upright():
+    return {"Name":"Wall2", "Type":"Map", "Symbol":"║", "Walkable":False}
+
+def spawn_corners():
+    return [{"Name":"corner1", "Type":"Map", "Symbol":"╔", "Walkable":False},
+    {"Name":"corner2", "Type":"Map", "Symbol":"╗", "Walkable":False},
+    {"Name":"corner3", "Type":"Map", "Symbol":"╚", "Walkable":False},
+    {"Name":"corner4", "Type":"Map", "Symbol":"╝", "Walkable":False}]
+
+def spawn_house():
+    return [{"Name":"char0", "Type":"Map", "Symbol":"__", "Walkable":False},
+    {"Name":"char1", "Type":"Map", "Symbol":"/", "Walkable":False},
+    {"Name":"char2", "Type":"Map", "Symbol":"\\", "Walkable":False},
+    {"Name":"char3", "Type":"Map", "Symbol":"-", "Walkable":False},
+    {"Name":"char4", "Type":"Map", "Symbol":'"', "Walkable":False},
+    {"Name":"char5", "Type":"Map", "Symbol":'_', "Walkable":False},
+    {"Name":"char6", "Type":"Map", "Symbol":'|', "Walkable":False},
+    {"Name":"char7", "Type":"Map", "Symbol":'~', "Walkable":False},
+    {"Name":"char8", "Type":"Map", "Symbol":'^', "Walkable":False}]
+
+def tree():
+    return {"Name":"Floor", "Type":"Map", "Symbol":"Y", "Walkable":False}
 #items 
+def spawn_nail():
+    return {"Name":"Nail", "Type":"Map", "Symbol":"╳", "Walkable":False}
 
 def spawn_scooby_snack():
     return {"Name":"Scooby snack", "Type":"Consumable", "HpReward":20, "Duration": 1}

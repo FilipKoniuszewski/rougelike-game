@@ -26,25 +26,24 @@ def Information_board(info):
     if len(information_board) > 5:
        information_board.pop(5)
   
-
 def print_log():
     print("\n")
     for i in range(len(information_board) - 1, -1, -1):
         print(information_board[i])
 
 
-def print_table(inventory):
-    print(f"""
-    !BACKPACK!
-    -----------------
-    item name | type
-    -----------------""")
-    for item in inventory:
-        # for key, value in item["Name"], item["Type"]:
-        print(item["Name"], ' : ', item["Type"] ,)
-        print("-----------------")
+# def print_table(inventory):
+#     print(f"""
+#     !BACKPACK!
+#     -----------------
+#     item name | type
+#     -----------------""")
+#     for item in inventory:
+#         # for key, value in item["Name"], item["Type"]:
+#         print(item["Name"], ' : ', item["Type"] ,)
+#         print("-----------------")
 
-    util.key_pressed()
+#     util.key_pressed()
 
 def display_stats(player):
     util.clear_screen()
@@ -159,21 +158,35 @@ def display_atribute_to_distribute(enchant):
 
 def inventory_menagment(player):
     inx=1
+    print("""
+    ╔═════════╗	
+    ║INVENTORY║
+    ╚═════════╝ """)
+    print(f"┌{18*'─'}┐")
     for item in player['Inventory']:
-        print(f"{inx}- {item['Name']}")
+        spaces = 16 - len(item["Name"])
+        if inx != 1:
+            print(f"├{18*'─'}┤")
+        print(f"│{inx}│{item['Name']}{spaces*' '}│")
         inx+=1
     success=False
+    print(f"└{18*'─'}┘")
+    print("""
+Press [number] to use item
+Press [something else] to leave inventory""")
     while not success:
-        user_input=util.key_pressed()
+        user_input=input()
         if user_input.isdigit():
             if int(user_input)>len(player['Inventory']):
-                print("Out of range")
+                break
             else:
                 util.use_item(player,player['Inventory'][int(user_input)-1])
                 player['Inventory'].pop(int(user_input)-1)
                 success=True
         if user_input =='c':
             success=True
+        else:
+            break
 
 def experience_level_check(player):
     if player["Experience"] >= player["Level"] * 500:
