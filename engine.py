@@ -155,10 +155,13 @@ def display_current_enemy():
     return table
     
 
-def display_end_screen(player):
+def display_end_screen(player, win=False):
     counters = [util.KILL_COUNT,util.STEPS_COUNT,util.CRITICAL_HITS]
     table = ""
-    table += "YOU LOST THE GAME\nSTATISTICS\n"
+    if not win:
+        table += "YOU LOST THE GAME\nSTATISTICS\n"
+    else:
+        table += "YOU WON THE GAME\nSTATISTICS\n"
     table += "╔══════════╦══════════╗\n"
     for element in player:
         if element == "Name":

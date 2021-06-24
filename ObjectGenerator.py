@@ -4,28 +4,32 @@ import random
 #characters
 
 def labrador_character():
-    inventory = [spawn_scooby_snack(), spawn_scooby_snack(), spawn_nail(), spawn_nail()]
+    inventory = [spawn_scooby_snack(), spawn_scooby_snack()]
     return {"Name":"labrador","Symbol":"L", "HP": 100, "BaseDamage":15, "CriticalChance":20
-    , "DodgeChance": 60,"Type":"Player", "Xpoz":1, "Ypoz":1
-    , "Walkable":False, "MaxHP":100, "Armor":0, "Level": 1, "Experience" : 0, "Inventory":inventory, "Atributes":1}
+    , "DodgeChance": 20,"Type":"Player", "Xpoz":1, "Ypoz":1
+    , "Walkable":False, "MaxHP":100, "Armor":0, "Level": 1, "Experience" : 0, "Inventory":inventory,
+     "Atributes":1, "Progress":False}
 
 def shiba_character():
     inventory = []
     return {"Name":"shiba", "Symbol":"S", "HP": 100, "BaseDamage":40, "CriticalChance":15
     , "DodgeChance": 20, "Type":"Player", "Xpoz":1, "Ypoz":1
-    , "Walkable":False, "MaxHP":100, "Armor":0, "Level": 1, "Experience" : 0, "Inventory":inventory, "Atributes":0}
+    , "Walkable":False, "MaxHP":100, "Armor":0, "Level": 1, "Experience" : 0, "Inventory":inventory,
+     "Atributes":0, "Progress":False}
 
 def doberman_character():
     inventory = []
     return {"Name":"doberman", "Symbol":"D", "HP": 100, "BaseDamage":40, "CriticalChance":20
     , "DodgeChance": 15, "Type":"Player", "Xpoz":1, "Ypoz":1
-    , "Walkable":False, "MaxHP":100, "Armor":0, "Level": 1, "Experience" : 0, "Inventory":inventory,"Atributes":0}
+    , "Walkable":False, "MaxHP":100, "Armor":0, "Level": 1, "Experience" : 0, "Inventory":inventory
+    ,"Atributes":0, "Progress":False}
 
 def mops_character():
     inventory = []
     return {"Name":"mops","Symbol":"M", "HP": 100, "BaseDamage":15, "CriticalChance":10
     , "DodgeChance": 15, "Type":"Player", "Xpoz":1, "Ypoz":1
-    , "Walkable":False, "MaxHP":100, "Armor":0, "Level": 1, "Experience" : 0, "Inventory":inventory, "Atributes":0}
+    , "Walkable":False, "MaxHP":100, "Armor":0, "Level": 1, "Experience" : 0, "Inventory":inventory,
+     "Atributes":0, "Progress":False}
 
 def spawn_dogge(Xpoz, Ypoz):
     inventory = [spawn_scooby_snack(),spawn_dog_food()]
@@ -41,19 +45,41 @@ def spawn_rat(Xpoz, Ypoz):
     , "DodgeChance": 0, "Armor":0, "XpReward": 300}
 
 def spawn_cat(Xpoz, Ypoz):
-    return {"Name":"cat", "Type":"Enemy", "Symbol":"C", "Xpoz":Xpoz
-    , "Ypoz":Ypoz, "Walkable":False, "Inventory": package_of_items()
-    , "HP": 200, "Level": 2, "MaxHP":200, "BaseDamage":20, "CriticalChance":20
-    , "DodgeChance": 0, "Armor":0, "XpReward": 300}
+    inventory = []
+    for i in range(random.randint(1,2)):
+        inventory.append(random.choice([spawn_scooby_snack(), spawn_scooby_snack(), spawn_coffee_bean(), spawn_cat_food(), spawn_cat_food()]))
+    return {"Name":"Stray cat", "Type":"Enemy", "Symbol":"C", "Xpoz":Xpoz
+    , "Ypoz":Ypoz, "Walkable":False, "Inventory": inventory
+    , "HP": 10, "Level": 2, "MaxHP":200, "BaseDamage":15, "CriticalChance":20
+    , "DodgeChance": 40, "Armor":0, "XpReward": 300}
+
+def spawn_boar(Xpoz, Ypoz):
+    inventory = []
+    for i in range(random.randint(1,2)):
+        inventory.append(random.choice([spawn_scooby_snack(), spawn_scooby_snack(), spawn_coffee_bean(), spawn_cat_food(), spawn_cat_food()]))
+    return {"Name":"Angry Boar", "Type":"Enemy", "Symbol":"B", "Xpoz":Xpoz
+    , "Ypoz":Ypoz, "Walkable":False, "Inventory": inventory
+    , "HP": 300, "Level": 5, "MaxHP":300, "BaseDamage":40, "CriticalChance":10
+    , "DodgeChance": 20, "Armor":0, "XpReward": 1500}
 
 def package_of_items():
     package_of_items = [spawn_scooby_snack(),spawn_collar(),
-    spawn_dog_food(),spawn_bone(),spawn_stick(),spawn_banana_peel(),spawn_ball()]
+    spawn_dog_food(),spawn_bone(),spawn_stick(),spawn_ball()]
     inventory = random.choices(package_of_items, weights = [1,1,1,1,1,1,1], k = 3)
     return inventory
 
 def spawn_floor():
     return {"Name":"Floor", "Type":"Map", "Symbol":".", "Walkable":True}
+
+def spawn_exit():
+    return {"Name":"Exit", "Type":"Map", "Symbol":"E", "Walkable":False}
+
+def spawn_fence():
+    return {"Name":"fence", "Type":"Map", "Symbol":"#", "Walkable":False}
+
+def spawn_tree():
+    return {"Name":"Tree", "Type":"Map", "Symbol":"Y", "Walkable":False}
+
 
 def spawn_nail():
     return {"Name":"Nail", "Type":"Map", "Symbol":"X", "Walkable":False}
@@ -66,7 +92,10 @@ def spawn_collar():
     return {"Name": "Collar", "Type": "Cloth", "ArmorReward": 50, "Duration": 1}
 
 def spawn_dog_food():
-    return {"Name": "Dog food", "Type": "Consumable", "HpReward": 50, "Duration": 1}
+    return {"Name": "Dog food", "Type": "Consumable", "HpReward": 50,}
+
+def spawn_cat_food():
+    return {"Name": "Cat food", "Type": "Consumable", "HpReward": 30,}
 
 def spawn_bone():
     return {"Name": "Bone", "Type": "Usable", "BaseDamageReward": 20, "DodgeChanceReward": -10, "Duration": 5}
@@ -74,8 +103,8 @@ def spawn_bone():
 def spawn_stick():
     return {"Name": "Stick", "Type": "Usable", "CriticalChanceReward": 20, "Duration": 10}
 
-def spawn_banana_peel():
-    return {"Name": "Banana peel", "Type": "Usable", "DodgeChanceReward": 0} #tu chciałam żeby całkowicie znikała możliwość uniku
+def spawn_coffee_bean():
+    return {"Name": "Coffee bean", "Type": "Usable", "DodgeChanceReward": 10, "Duration": 15} #tu chciałam żeby całkowicie znikała możliwość uniku
 
 def spawn_ball():
     return {"Name": "Ball", "Type": "Usable"}
@@ -85,11 +114,11 @@ def spawn_ball():
 #Atributes
 
 def strength_atribute():
-    return {"Name": "Strength", "Enchant": "BaseDamage+25"}
+    return {"Name": "Strength", "Enchant": "BaseDamage+15"}
 def vitality_atribute():
     return {"Name": "Vitality", "Enchant": "MaxHP+25"}
 def speed_atribute():
-    return {"Name": "Speed", "Enchant": "DodgeChance+10"}
+    return {"Name": "Speed", "Enchant": "DodgeChance+5"}
 def crit_atribute():
     return {"Name": "Critical", "Enchant": "CriticalChance+10"}
 

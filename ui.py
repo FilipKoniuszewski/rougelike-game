@@ -108,7 +108,7 @@ Press [a] to previous enchant""")
                         player["MaxHP"] += 25
                         player['Atributes'] -= 1
                     elif enchant == 2:
-                        player["DodgeChance"] += 10
+                        player["DodgeChance"] += 5
                         player['Atributes'] -= 1
                     elif enchant == 3:
                         player["CriticalChance"] += 10
@@ -173,12 +173,10 @@ def inventory_menagment(player):
                 player['Inventory'].pop(int(user_input)-1)
                 success=True
         if user_input =='c':
-        
-            
             success=True
 
 def experience_level_check(player):
-    if player["Experience"] > player["Level"] * 500:
+    if player["Experience"] >= player["Level"] * 500:
        player["Experience"] -= player["Level"] * 500
        player["Level"]+=1
        player["HP"] = player["MaxHP"]

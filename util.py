@@ -67,7 +67,6 @@ def move_player(board, player):
         if player["Ypoz"] - 1 >= 0:
             if board[player["Ypoz"] - 1][player["Xpoz"]]["Walkable"]:
                 board[player["Ypoz"] - 1][player["Xpoz"]] = player
-                
                 if Nail_flag:
                     board[player["Ypoz"]][player["Xpoz"]] = ObjectGenerator.spawn_nail()
                     Nail_flag = False
@@ -77,6 +76,8 @@ def move_player(board, player):
             elif board[player["Ypoz"] - 1][player["Xpoz"]]["Type"] == "Enemy":
                 Attack_chances(player, board[player["Ypoz"] - 1][player["Xpoz"]])
                 engine.CURRENT_ENEMY = board[player["Ypoz"] - 1][player["Xpoz"]]
+            elif board[player["Ypoz"] - 1][player["Xpoz"]]["Name"] == "Exit" and player["Progress"]:
+                return None
             else:
                 return False
         else:
@@ -94,6 +95,8 @@ def move_player(board, player):
             elif board[player["Ypoz"] + 1][player["Xpoz"]]["Type"] == "Enemy":
                 Attack_chances(player,board[player["Ypoz"] + 1][player["Xpoz"]])
                 engine.CURRENT_ENEMY = board[player["Ypoz"] + 1][player["Xpoz"]]
+            elif board[player["Ypoz"] + 1][player["Xpoz"]]["Name"] == "Exit" and player["Progress"]:
+                return None
             else:
                 return False
         else:
@@ -111,6 +114,8 @@ def move_player(board, player):
             elif board[player["Ypoz"]][player["Xpoz"] + 1]["Type"] == "Enemy":
                 Attack_chances(player,board[player["Ypoz"]][player["Xpoz"] + 1])
                 engine.CURRENT_ENEMY = board[player["Ypoz"]][player["Xpoz"] + 1]
+            elif board[player["Ypoz"]][player["Xpoz"] + 1]["Name"] == "Exit" and player["Progress"]:
+                return None
             else:
                 return False
         else:
@@ -128,6 +133,8 @@ def move_player(board, player):
             elif board[player["Ypoz"]][player["Xpoz"] - 1]["Type"] == "Enemy":
                 Attack_chances(player,board[player["Ypoz"]][player["Xpoz"] - 1])
                 engine.CURRENT_ENEMY = board[player["Ypoz"]][player["Xpoz"] - 1]
+            elif board[player["Ypoz"]][player["Xpoz"] - 1]["Name"] == "Exit" and player["Progress"]:
+                return None
             else:
                 return False
         else:
@@ -137,9 +144,9 @@ def move_player(board, player):
         ui.inventory_menagment(player)
         return False    
     elif pressed_key == "u": # testy
-        use_item(player, ObjectGenerator.spawn_stick())
+        use_item(player, ObjectGenerator.spawn_cat_food())
         return False    
-    elif pressed_key == "p": # testy
+    elif pressed_key == "p":
         ui.display_stats(player)
         return False  
     else:
@@ -229,14 +236,14 @@ def use_item(player, item):
             player["HP"] = player["MaxHP"]
     elif "CriticalChanceReward" in item:
         player["CriticalChance"] += item["CriticalChanceReward"]
-        if player["CriticalChanceReward"] > 100:
-            player["CriticalChanceReward"] = 100
+        # if player["CriticalChanceReward"] > 100:
+        #     player["CriticalChanceReward"] = 100
         EFFECTS.append(["CriticalChance", item["Duration"], item["CriticalChanceReward"]])
     elif "DodgeChanceReward" in item:
         player["DodgeChance"] += item["DodgeChanceReward"]
-        if player["DodgeChanceReward"] > 100:
-            player["DodgeChanceReward"] = 100
-        EFFECTS.append("DodgeChance", item["Duration"]), item["DodgeChanceReward"]
+        # if player["DodgeChanceReward"] > 100:
+        #     player["DodgeChanceReward"] = 100
+        EFFECTS.append(["DodgeChance", item["Duration"], item["DodgeChanceReward"]])
     elif "ArmorReward" in item:
         player["Armor"] += item["ArmorReward"]
         if player["DodgeChanceReward"] > 100:
@@ -244,7 +251,7 @@ def use_item(player, item):
         EFFECTS.append("ArmorChance", item["Duration"]), item["ArmorChanceReward"]
     elif "BaseDamageReward" in item:
         player["BaseDamage"] += item["BaseDamageReward"]
-        EFFECTS.append("BaseDamageChance", item["Duration"]), item["BaseChanceReward"]    
+        EFFECTS.append(["BaseDamage", item["Duration"], item["BaseDamageReward"]])    
     elif item["Name"] == "Nail":
         Nail_flag = True
 
@@ -284,28 +291,32 @@ def move_boss(player, board, boss_list):
         if Ymid > 2 and direction == 0:
             for part in boss_list:#move up
                 if board[part["Ypoz"] - 1][part["Xpoz"]]["Name"] == "Nail":
-                    Boss_stun = 7
+                    Boss_stun = 10
+                    ui.Information_board("Dog Catcher is stuned!")
                 part["Ypoz"] -= 1
                 board[part["Ypoz"]][part["Xpoz"]] = part
                 board[part["Ypoz"] + 1][part["Xpoz"]] = ObjectGenerator.spawn_floor()
         if Xmid > 2 and direction == 1:
             for part in boss_list:#move left
                 if board[part["Ypoz"]][part["Xpoz"] - 1]["Name"] == "Nail":
-                    Boss_stun = 7
+                    Boss_stun = 10
+                    ui.Information_board("Dog Catcher is stuned!")
                 part["Xpoz"] -= 1
                 board[part["Ypoz"]][part["Xpoz"]] = part
                 board[part["Ypoz"]][part["Xpoz"] + 1] = ObjectGenerator.spawn_floor()
         if Xmid < len(board[0]) - 3 and direction == 2:
             for part in boss_list:#move right
                 if board[part["Ypoz"]][part["Xpoz"] + 1]["Name"] == "Nail":
-                    Boss_stun = 7
+                    Boss_stun = 10
+                    ui.Information_board("Dog Catcher is stuned!")
                 part["Xpoz"] += 1
                 board[part["Ypoz"]][part["Xpoz"]] = part
                 board[part["Ypoz"]][part["Xpoz"] - 1] = ObjectGenerator.spawn_floor()
         if Ymid < len(board) - 3 and direction == 3:
             for part in boss_list:#move down
                 if board[part["Ypoz"] + 1][part["Xpoz"]]["Name"] == "Nail":
-                    Boss_stun = 7
+                    Boss_stun = 10
+                    ui.Information_board("Dog Catcher is stuned!")
                 part["Ypoz"] += 1
                 board[part["Ypoz"]][part["Xpoz"]] = part
                 board[part["Ypoz"] - 1][part["Xpoz"]] = ObjectGenerator.spawn_floor()
