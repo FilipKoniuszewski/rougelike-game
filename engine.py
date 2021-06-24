@@ -84,7 +84,7 @@ def create_player():
 Press [e] choose this character
 Press [d] next character
 Press [a] previous character\n""")
-        user_input = util.key_pressed()
+        user_input = util.key_pressed().lower()
         if user_input == 'e':
             player_input = input("Put name of your character: ")
             character_type["Name"] = player_input

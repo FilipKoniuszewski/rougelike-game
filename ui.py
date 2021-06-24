@@ -195,7 +195,7 @@ def experience_level_check(player):
        player["Level"]+=1
        player["HP"] = player["MaxHP"]
        player["Atributes"]+=2
-       Information_board(f"You entered level{player['Level']}")
+       Information_board(f"***You reached level {player['Level']}!***")
     
         
     

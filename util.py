@@ -237,16 +237,19 @@ def use_item(player, item):
         player["HP"] += item["HpReward"]
         if player["HP"] > player["MaxHP"]:
             player["HP"] = player["MaxHP"]
+        ui.Information_board(f"{player['Name']} has healed {item['HpReward']} points.")
     if "CriticalChanceReward" in item:
         player["CriticalChance"] += item["CriticalChanceReward"]
         # if player["CriticalChanceReward"] > 100:
         #     player["CriticalChanceReward"] = 100
         EFFECTS.append(["CriticalChance", item["Duration"], item["CriticalChanceReward"]])
+        ui.Information_board(f"{player['Name']} critical chance increased by {item['CriticalChanceReward']} points for {item['Duration']} turns.")
     if "DodgeChanceReward" in item:
         player["DodgeChance"] += item["DodgeChanceReward"]
         # if player["DodgeChanceReward"] > 100:
         #     player["DodgeChanceReward"] = 100
         EFFECTS.append(["DodgeChance", item["Duration"], item["DodgeChanceReward"]])
+        ui.Information_board(f"{player['Name']} dodge chance increased by {item['DodgeChanceReward']} points for {item['Duration']} turns.")
     if "ArmorReward" in item:
         player["Armor"] += item["ArmorReward"]
         if player["DodgeChanceReward"] > 100:
@@ -254,7 +257,8 @@ def use_item(player, item):
         EFFECTS.append("ArmorChance", item["Duration"]), item["ArmorChanceReward"]
     if "BaseDamageReward" in item:
         player["BaseDamage"] += item["BaseDamageReward"]
-        EFFECTS.append(["BaseDamage", item["Duration"], item["BaseDamageReward"]])    
+        EFFECTS.append(["BaseDamage", item["Duration"], item["BaseDamageReward"]])  
+        ui.Information_board(f"{player['Name']} base damage increased by {item['BaseDamageReward']} points for {item['Duration']} turns.")  
     if item["Name"] == "Nail":
         Nail_flag = True
 

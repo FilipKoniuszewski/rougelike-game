@@ -5,30 +5,30 @@ import random
 
 def labrador_character():
     inventory = []
-    return {"Name":"labrador","Symbol":"L", "HP": 100, "BaseDamage":15, "CriticalChance":20
-    , "DodgeChance": 20,"Type":"Player", "Xpoz":1, "Ypoz":1
-    , "Walkable":False, "MaxHP":100, "Armor":0, "Level": 1, "Experience" : 0, "Inventory":inventory,
-     "Atributes":1, "Progress":False}
+    return {"Name":"labrador","Symbol":"L", "HP": 125, "BaseDamage":20, "CriticalChance":10
+    , "DodgeChance": 10,"Type":"Player", "Xpoz":1, "Ypoz":1
+    , "Walkable":False, "MaxHP":125, "Armor":0, "Level": 1, "Experience" : 0, "Inventory":inventory,
+     "Atributes":0, "Progress":False}
 
 def shiba_character():
     inventory = []
-    return {"Name":"shiba", "Symbol":"S", "HP": 100, "BaseDamage":40, "CriticalChance":15
-    , "DodgeChance": 20, "Type":"Player", "Xpoz":1, "Ypoz":1
+    return {"Name":"shiba", "Symbol":"S", "HP": 100, "BaseDamage":15, "CriticalChance":20
+    , "DodgeChance": 25, "Type":"Player", "Xpoz":1, "Ypoz":1
     , "Walkable":False, "MaxHP":100, "Armor":0, "Level": 1, "Experience" : 0, "Inventory":inventory,
      "Atributes":0, "Progress":False}
 
 def doberman_character():
     inventory = []
-    return {"Name":"doberman", "Symbol":"D", "HP": 100, "BaseDamage":40, "CriticalChance":20
+    return {"Name":"doberman", "Symbol":"D", "HP": 80, "BaseDamage":40, "CriticalChance":10
     , "DodgeChance": 15, "Type":"Player", "Xpoz":1, "Ypoz":1
-    , "Walkable":False, "MaxHP":100, "Armor":0, "Level": 1, "Experience" : 0, "Inventory":inventory
+    , "Walkable":False, "MaxHP":80, "Armor":0, "Level": 1, "Experience" : 0, "Inventory":inventory
     ,"Atributes":0, "Progress":False}
 
 def mops_character():
     inventory = []
-    return {"Name":"mops","Symbol":"M", "HP": 100, "BaseDamage":15, "CriticalChance":10
+    return {"Name":"mops","Symbol":"M", "HP": 60, "BaseDamage":15, "CriticalChance":10
     , "DodgeChance": 15, "Type":"Player", "Xpoz":1, "Ypoz":1
-    , "Walkable":False, "MaxHP":100, "Armor":0, "Level": 1, "Experience" : 0, "Inventory":inventory,
+    , "Walkable":False, "MaxHP":60, "Armor":0, "Level": 1, "Experience" : 0, "Inventory":inventory,
      "Atributes":0, "Progress":False}
 
 def spawn_dogge(Xpoz, Ypoz):
@@ -49,7 +49,7 @@ def spawn_rat(Xpoz, Ypoz):
 
 def spawn_cat(Xpoz, Ypoz):
     inventory = []
-    for i in range(random.randint(1,2)):
+    for i in range(random.randint(0,2)):
         inventory.append(random.choice([spawn_scooby_snack(), spawn_scooby_snack(), spawn_coffee_bean(), spawn_cat_food(), spawn_cat_food()]))
     return {"Name":"Stray cat", "Type":"Enemy", "Symbol":"C", "Xpoz":Xpoz
     , "Ypoz":Ypoz, "Walkable":False, "Inventory": inventory
@@ -166,15 +166,19 @@ def spawn_boar_horn():
 
 Boss_hp = 500
 
+
 def spawn_tire(Ypoz, Xpoz):
+    global Boss_hp
     return {"Name":"Dog catcher", "Symbol":"X", "Xpoz":Xpoz, "Ypoz":Ypoz, "Type":"Enemy", "HP":Boss_hp, "BaseDamage":30, "CriticalChance":15, "DodgeChance": 20
     , "XpReward": 100, "Walkable":False}
 
 def spawn_hull(Ypoz, Xpoz):
+    global Boss_hp
     return {"Name":"Dog catcher", "Symbol":"#", "Xpoz":Xpoz, "Ypoz":Ypoz, "Type":"Enemy", "HP":Boss_hp, "BaseDamage":30, "CriticalChance":15, "DodgeChance": 20
     , "XpReward": 100, "Walkable":False}
 
 def spawn_roof(Ypoz, Xpoz):
+    global Boss_hp
     return {"Name":"Dog catcher", "Symbol":"O", "Xpoz":Xpoz, "Ypoz":Ypoz, "Type":"Enemy", "HP":Boss_hp, "BaseDamage":30, "CriticalChance":15, "DodgeChance": 20
     , "XpReward": 100, "Walkable":False}
 

@@ -24,6 +24,7 @@ def shuffle_effects(player):
         if effect[1] == 0:
             player[effect[0]] -= effect[2]
             to_pop.append(effect)
+            ui.Information_board(f"{effect[0]} bonus is over.")
     for effect in to_pop:
         util.EFFECTS.remove(effect)
 
@@ -58,6 +59,16 @@ def play_map(player, board, list_of_enemies):
             enemy_turn = False
         else:
             enemy_turn = True
+
+def update_boss_hp(boss_list):
+    min = 500
+    for part in boss_list:
+        if part["HP"] < min:
+            min = part["HP"]
+    for part in boss_list:
+        part["HP"] = min
+            
+
 
 
 def game_loop():
@@ -125,6 +136,7 @@ def game_loop():
                         ui.display_board(board)
                         ui.print_log()
                         success = util.move_player(board, player)
+                    update_boss_hp(boss_list)
                     if enemy_turn:
                         if util.Boss_stun <= 0:
                             util.move_boss(player, board, boss_list)
@@ -152,6 +164,6 @@ if __name__ == '__main__':
     while user_input.lower() == "y":
         util.clear_screen()
         game_loop()
-        input("Do you want to play again? (y/n)")
+        user_input = input("Do you want to play again? (y/n)")
 
 
