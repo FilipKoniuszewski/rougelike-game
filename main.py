@@ -115,8 +115,6 @@ def play_map(player, board, list_of_enemies):
             util.enemy_activity(board, list_of_enemies, player)
             if player["HP"] <= 0:
                 return False
-                util.clear_screen()
-                print(engine.display_end_screen(player))
             enemy_turn = False
         else:
             enemy_turn = True

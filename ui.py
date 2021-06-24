@@ -162,15 +162,16 @@ def inventory_menagment(player):
     ╔═════════╗	
     ║INVENTORY║
     ╚═════════╝ """)
-    print(f"┌{18*'─'}┐")
+    print(f"┌{20*'─'}┐")
     for item in player['Inventory']:
         spaces = 16 - len(item["Name"])
+        spaces1 = 3 - len(str(inx))
         if inx != 1:
-            print(f"├{18*'─'}┤")
-        print(f"│{inx}│{item['Name']}{spaces*' '}│")
+            print(f"├{20*'─'}┤")
+        print(f"│{inx}{' '*spaces1}│{item['Name']}{spaces*' '}│")
         inx+=1
     success=False
-    print(f"└{18*'─'}┘")
+    print(f"└{20*'─'}┘")
     print("""
 Press [number] to use item
 Press [something else] to leave inventory""")
