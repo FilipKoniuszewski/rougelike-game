@@ -53,7 +53,19 @@ def package_of_items():
     return inventory
 
 def spawn_floor():
-    return {"Name":"Floor", "Type":"Map", "Symbol":".", "Walkable":True}
+    return {"Name":"Floor", "Type":"Map", "Symbol":" ", "Walkable":True}
+
+def spawn_wall_horizontal():
+    return {"Name":"Wall1", "Type":"Map", "Symbol":"▅", "Walkable":False}
+
+def spawn_wall_upright():
+    return {"Name":"Wall2", "Type":"Map", "Symbol":"▊", "Walkable":False}
+
+def spawn_corners():
+    return [{"Name":"corner1", "Type":"Map", "Symbol":"▇", "Walkable":False},
+    {"Name":"corner2", "Type":"Map", "Symbol":"▇", "Walkable":False},
+    {"Name":"corner3", "Type":"Map", "Symbol":"▇", "Walkable":False},
+    {"Name":"corner4", "Type":"Map", "Symbol":"▇", "Walkable":False}]
 #items 
 
 def spawn_scooby_snack():

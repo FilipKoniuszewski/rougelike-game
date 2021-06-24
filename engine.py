@@ -22,6 +22,19 @@ def create_board(width, height):
         board.append([])
         for j in range(height):
             board[i].append(ObjectGenerator.spawn_floor())
+    for i in range(1,29):
+        board[0][i] = ObjectGenerator.spawn_wall_horizontal()
+        board[19][i] = ObjectGenerator.spawn_wall_horizontal()
+    for i in range(1,19):
+         board[i][0] = ObjectGenerator.spawn_wall_upright()
+         board[i][29] = ObjectGenerator.spawn_wall_upright()
+    corners = ObjectGenerator.spawn_corners()
+    board[0][0] = corners[0]
+    board[0][29] = corners[1]
+    board[19][0] = corners[2]
+    board[19][29] = corners[3]
+
+    
     return board
 
 def put_player_on_board(board, player):
