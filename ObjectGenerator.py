@@ -65,14 +65,6 @@ def spawn_boar(Xpoz, Ypoz):
     , "HP": 300, "Level": 5, "MaxHP":300, "BaseDamage":40, "CriticalChance":10
     , "DodgeChance": 20, "Armor":0, "XpReward": 1500}
 
-def spawn_boar(Xpoz, Ypoz):
-    inventory = []
-    for i in range(random.randint(1,2)):
-        inventory.append(random.choice([spawn_scooby_snack(), spawn_scooby_snack(), spawn_coffee_bean(), spawn_cat_food(), spawn_cat_food()]))
-    return {"Name":"Boar", "Type":"Enemy", "Symbol":"B", "Xpoz":Xpoz
-    , "Ypoz":Ypoz, "Walkable":False, "Inventory": inventory
-    , "HP": 200, "Level": 2, "MaxHP":300, "BaseDamage":40, "CriticalChance":20
-    , "DodgeChance": 0, "Armor":0, "XpReward": 340}
 
 #map
 
