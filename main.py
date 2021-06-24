@@ -30,7 +30,7 @@ def shuffle_effects(player):
 
     
 
-def main():
+# def main():
     # player = create_player()
     # board = engine.create_board(BOARD_WIDTH, BOARD_HEIGHT)
 
@@ -47,46 +47,46 @@ def main():
     #         pass
     #     util.clear_screen()
 
-    board = engine.create_board(20,30)
-    player = engine.create_player()
-    engine.put_player_on_board(board, player)
-    # engine.put_player_on_board(board, ObjectGenerator.spawn_dogge(5,3))
-    list_of_enemies = []
-    # util.add_enemies(board, 3, list_of_enemies)
-    boss_list = []
-    util.spawn_boss(board, 10, 10, boss_list)
-    enemy_turn = False
-    while player["HP"] > 0:
-        util.clear_screen()
-        print(engine.display_statistics(player))
-        print(engine.display_current_enemy())
-        ui.display_board(board)
-        ui.print_log()
-        success = False
-        shuffle_effects(player)
-        util.remove_dead_mobs(player, board, list_of_enemies)
-        ui.experience_level_check(player)
-        if util.Boss_stun > 0:
-            util.Boss_stun -= 1
-        while not success:
-            util.clear_screen()
-            print(engine.display_statistics(player))
-            print(engine.display_current_enemy())
-            ui.display_board(board)
-            ui.print_log()
-            success = util.move_player(board, player)
-            if success:
-                util.Steps_count += 1
-        if enemy_turn:
-            util.enemy_activity(board, list_of_enemies, player)
-            if util.Boss_stun <= 0:
-                util.move_boss(player, board, boss_list)
-            if player["HP"] <= 0:
-                util.clear_screen()
-                print(engine.display_end_screen(player))
-            enemy_turn = False
-        else:
-            enemy_turn = True
+    # board = engine.create_board(20,30,hause=True)
+    # player = engine.create_player()
+    # engine.put_player_on_board(board, player)
+    # # engine.put_player_on_board(board, ObjectGenerator.spawn_dogge(5,3))
+    # list_of_enemies = []
+    # # util.add_enemies(board, 3, list_of_enemies)
+    # boss_list = []
+    # util.spawn_boss(board, 10, 10, boss_list)
+    # enemy_turn = False
+    # while player["HP"] > 0:
+    #     util.clear_screen()
+    #     print(engine.display_statistics(player))
+    #     print(engine.display_current_enemy())
+    #     ui.display_board(board)
+    #     ui.print_log()
+    #     success = False
+    #     shuffle_effects(player)
+    #     util.remove_dead_mobs(player, board, list_of_enemies)
+    #     ui.experience_level_check(player)
+    #     if util.Boss_stun > 0:
+    #         util.Boss_stun -= 1
+    #     while not success:
+    #         util.clear_screen()
+    #         print(engine.display_statistics(player))
+    #         print(engine.display_current_enemy())
+    #         ui.display_board(board)
+    #         ui.print_log()
+    #         success = util.move_player(board, player)
+    #         if success:
+    #             util.Steps_count += 1
+    #     if enemy_turn:
+    #         util.enemy_activity(board, list_of_enemies, player)
+    #         if util.Boss_stun <= 0:
+    #             util.move_boss(player, board, boss_list)
+    #         if player["HP"] <= 0:
+    #             util.clear_screen()
+    #             print(engine.display_end_screen(player))
+    #         enemy_turn = False
+    #     else:
+    #         enemy_turn = True
 
 def play_map(player, board, list_of_enemies):
     enemy_turn = False
@@ -123,12 +123,8 @@ def play_map(player, board, list_of_enemies):
 def game_loop():
     player = engine.create_player()
     dialogue.dialogue_with_Benek() # poprawić imię 
-
-    board = engine.create_board(20,30)
-    board[18][28] = ObjectGenerator.spawn_exit()
     list_of_enemies = []
-    util.add_enemies(board, 1, list_of_enemies)
-
+    board = MapCreator.create_1st_map(list_of_enemies)
     success = play_map(player, board, list_of_enemies)
     if success:
         dialogue.second_dialogue_with_Benek()
