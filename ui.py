@@ -26,26 +26,24 @@ def Information_board(info):
     if len(information_board) > 5:
        information_board.pop(5)
   
-
 def print_log():
+    print("\n")
     for i in range(len(information_board) - 1, -1, -1):
         print(information_board[i])
 
-    # for line in information_board:
-    #     print(line)
 
-def print_table(inventory):
-    print(f"""
-    !BACKPACK!
-    -----------------
-    item name | type
-    -----------------""")
-    for item in inventory:
-        # for key, value in item["Name"], item["Type"]:
-        print(item["Name"], ' : ', item["Type"] ,)
-        print("-----------------")
+# def print_table(inventory):
+#     print(f"""
+#     !BACKPACK!
+#     -----------------
+#     item name | type
+#     -----------------""")
+#     for item in inventory:
+#         # for key, value in item["Name"], item["Type"]:
+#         print(item["Name"], ' : ', item["Type"] ,)
+#         print("-----------------")
 
-    util.key_pressed()
+#     util.key_pressed()
 
 def display_stats(player):
     util.clear_screen()
@@ -72,14 +70,18 @@ def display_stats(player):
                 table += f"│{stat}{spaces*' '}{player[stat]}│\n"
     table += f"""└{20*'─'}┘\n"""
     print(table)
-
-def atributes(player):
     if player["Atributes"] != 0:
         print("""\n
     ┌─────────────────────────────────┐
     │You have new atributes. Press [g]│
     └─────────────────────────────────┘
         """)
+    user_input = util.key_pressed()
+    if user_input == "g":
+        atributes(player)
+
+
+def atributes(player):
         if util.key_pressed() == "g":
             util.clear_screen()
             enchant = 0
@@ -105,7 +107,7 @@ Press [a] to previous enchant""")
                         player["MaxHP"] += 25
                         player['Atributes'] -= 1
                     elif enchant == 2:
-                        player["DodgeChance"] += 10
+                        player["DodgeChance"] += 5
                         player['Atributes'] -= 1
                     elif enchant == 3:
                         player["CriticalChance"] += 10
@@ -132,7 +134,6 @@ def display_atributes(player):
     table += f"""└{20*'─'}┘\n"""
     return table
 
-
 def display_atribute_to_distribute(enchant):
     table = ""
     table += f"┌{41*'─'}┐\n"
@@ -155,13 +156,45 @@ def display_atribute_to_distribute(enchant):
     table += f"└{41*'─'}┘\n"
     return table
 
-def experience_level_check(x):
-    if x["Experience"] > x["Level"] * 500:
-       x["Experience"] -= x["Level"] * 500
-       x["Level"]+=1
-       x["HP"] = x["MaxHP"]
-       x["Atributes"]+=2
-       Information_board(f"Congratulation !!! You are on level{x['Level']}")
+def inventory_menagment(player):
+    inx=1
+    print("""
+    ╔═════════╗	
+    ║INVENTORY║
+    ╚═════════╝ """)
+    print(f"┌{18*'─'}┐")
+    for item in player['Inventory']:
+        spaces = 16 - len(item["Name"])
+        if inx != 1:
+            print(f"├{18*'─'}┤")
+        print(f"│{inx}│{item['Name']}{spaces*' '}│")
+        inx+=1
+    success=False
+    print(f"└{18*'─'}┘")
+    print("""
+Press [number] to use item
+Press [something else] to leave inventory""")
+    while not success:
+        user_input=input()
+        if user_input.isdigit():
+            if int(user_input)>len(player['Inventory']):
+                break
+            else:
+                util.use_item(player,player['Inventory'][int(user_input)-1])
+                player['Inventory'].pop(int(user_input)-1)
+                success=True
+        if user_input =='c':
+            success=True
+        else:
+            break
+
+def experience_level_check(player):
+    if player["Experience"] >= player["Level"] * 500:
+       player["Experience"] -= player["Level"] * 500
+       player["Level"]+=1
+       player["HP"] = player["MaxHP"]
+       player["Atributes"]+=2
+       Information_board(f"You entered level{player['Level']}")
     
         
     
