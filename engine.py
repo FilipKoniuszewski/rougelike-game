@@ -70,6 +70,7 @@ def put_player_on_board(board, player):
 def create_player():
     type = 0
     while True:
+        print('\nAnd this is a beginning of your adventure!')
         print(""" \nCHOOSE YOUR CHARACTER: \n""")
         if type == 0:
             character_type = ObjectGenerator.labrador_character()

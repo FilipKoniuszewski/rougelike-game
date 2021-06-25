@@ -72,6 +72,8 @@ def update_boss_hp(boss_list):
 
 
 def game_loop():
+    dialogue.telling_the_story()
+    util.clear_screen()
     player = engine.create_player()
     dialogue.dialogue_with_Benek(player) # poprawić imię 
     list_of_enemies = []

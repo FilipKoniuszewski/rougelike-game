@@ -243,7 +243,7 @@ def second_dialogue_with_Benek(player):
 
 def third_dialogue_with_Benek(player):
   util.clear_screen()
-  print("Benek: Here you go, you probably want to take some food on the road\n")
+  print("Benek: Here you go, you probably want to take some food on the road.\n")
   key_pressed()
   print(f"{player['Name']}: Thank you! Do you think I'm gonna find my human?\n")
   key_pressed()
@@ -259,6 +259,20 @@ def third_dialogue_with_Benek(player):
 ''')
   key_pressed
   print("Benek: Take this too.\n")
+  print('''
+           .--._ 
+         \ ).'
+          )|/
+         ''''_.''''-._
+       (        \\
+        \        )
+        )'-.    (
+       /     _.-'\\
+      /           )
+     ('-._       /
+      \        _/      
+       '-.__==''  
+       ''')
   key_pressed()
   print(f"{player['Name']}: Ewww! What's that? It smells so bad..\n")
   key_pressed()
@@ -292,7 +306,7 @@ def dialogue_with_cat(player):
   key_pressed()
   print(f"{player['Name']}: I lost my human. Did you see him?\n")
   key_pressed()
-  print("Stripe: So you don't have home... give me that collar little dog.\n")
+  print("Stripe: So you don't have home... give me that collar you little dog!\n")
   key_pressed()
   print(f"{player['Name']}: I don't want to...\n")
   key_pressed()
@@ -357,18 +371,37 @@ def dialogue_with_boar(player):
   print("Mr Boar: YOU! I'M GONNA RAM YOU!!!!!!!\n")
   key_pressed()
 
-
-
-
-
-# if __name__ == "__main__":
-#   dialogue_with_Benek()
-#   second_dialogue_with_Benek()
-#   waiting_screen(frames)
-#   third_dialogue_with_Benek()
-#   waiting_screen(frames_2)
-#   dialogue_with_cat()
-#   key_pressed()
-#   second_dialogue_with_cat()
-#   waiting_screen(cat_frames)
-#   dialogue_with_boar()
+def telling_the_story():
+  print('\nFrom the beginning...\n\n\n')
+  sleep(3)
+  print('''
+                      _,)
+            _..._.-;-'
+        .-'     `(
+       /      ;   \\
+      ;.' ;`  ,;  ;
+     .'' ``. (  \ ;
+    / f_ _L \ ;  )\\
+    \/|` '|\/;; <;/
+   ((; \_/  (()       
+      \n''')
+  print('There was a little dog living with his Owner in small flat.\n')
+  sleep(10)
+  print('One day the Owner decide to go for a walk to nearest park.\n')
+  sleep(10)
+  print('When they came there, it turn out that a lot of people came up with the same idea...\n')
+  sleep(10)
+  print("It wouldn't be any difference, but it was. They were going to find out in few more minutes.\n")
+  sleep(10)
+  print('''
+          _._
+        .'--.`.
+        |  .' |  
+         `--`'
+              ''')
+  print('Owner started throwing the tennis ball\n')
+  sleep(10)
+  print('Dog ran for the ball... and got lost\n')
+  sleep(10)
+  print('Owner was trying to find little dog, but it disappered...')
+  sleep(10)
