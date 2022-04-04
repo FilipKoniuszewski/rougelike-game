@@ -1,5 +1,7 @@
 # Roguelike game
 
+- Codecool Project
+
 ## Story
 
 "La Speluna", a company from San Escobar contacted you and asked
