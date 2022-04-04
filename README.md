@@ -31,11 +31,11 @@ In this project your job is to implement a
 - clean code.
 
 ## Contributors:
-[Pola Jędrecka](https://github.com/PolaJedrecka)
-[Filip Koniuszewski](https://github.com/FilipKoniuszewski)
-[Paweł Kamiński](https://github.com/Pawel-Kaminski404)
-[Marcin Żyła](https://github.com/marcinZyla13)
-[Maciek Korulczyk](https://github.com/mkorulczyk)
+- [Pola Jędrecka](https://github.com/PolaJedrecka)
+- [Filip Koniuszewski](https://github.com/FilipKoniuszewski)
+- [Paweł Kamiński](https://github.com/Pawel-Kaminski404)
+- [Marcin Żyła](https://github.com/marcinZyla13)
+- [Maciek Korulczyk](https://github.com/mkorulczyk)
 
 
 
