@@ -22,7 +22,7 @@ of milk? firewalls?) and many dangerous enemies. Use your imagination!.
 In this project your job is to implement a
 [Roguelike](https://en.wikipedia.org/wiki/Roguelike) game.
 
-## What have we learnt?
+## What have we learned?
 
 - variables, functions, loops and conditionals,
 - nested lists,
